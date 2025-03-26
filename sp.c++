@@ -4,8 +4,8 @@
 #include<iomanip>
 #include<string>
 using namespace std;
-<<<<<<< HEAD
 int userChoice;
+
 void menu(), login(), registeration();
 int main()
 {
@@ -52,3 +52,4 @@ void login()
 
 }
 ///test
+//lol
