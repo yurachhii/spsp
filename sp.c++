@@ -6,4 +6,4 @@
 using namespace std;
 int main(){
     cout<<"This is my task as'Admin'\n";
-}
+}///malak was here 
