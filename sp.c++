@@ -51,8 +51,3 @@ void login()
 {
 
 }
-=======
-int main(){
-    cout<<"This is my task as'Admin'\n";
-}///malak was here 
->>>>>>> e3d4e1189d08591a9ffb073c6030d094e61139ad
