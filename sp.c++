@@ -13,7 +13,7 @@ int main()
     return 0;
 }
 void menu()
-{
+{   //home page that appears in the first program
     cout << "Welcome to University Library System\n";
     cout << setw(30) << setfill('-') << "\n";
     cout << "1. Student log in \n";
@@ -21,7 +21,7 @@ void menu()
     cout << "3. Register\n";
     cout << "4. Exit \n";
     cout << "Enter your choice between (1-4) : ";
-    cin >> userChoice;
+    cin >> userChoice; 
     switch (userChoice)
     {
     case 1:login();
@@ -35,10 +35,11 @@ void menu()
         return;
         break;
     default:
-        cout << "Invalid Number!! Do you want to return a home page ?(y/n) ";
+        cout << "Invalid Number!! Do you want to return a home page ?(y/n) "; //what if he didnot give us the right answer?
         char confirm;
         cin >> confirm;
-        while ((confirm != 'y' && confirm != 'Y' )&& (confirm != 'n' && confirm != 'N'))
+        //I handle it with loop if he didnot give us the right answer
+        while ((confirm != 'y' && confirm != 'Y' )&& (confirm != 'n' && confirm != 'N')) 
         {
             cout << '\n';
             cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
@@ -59,4 +60,3 @@ void login()
 }
 void adminmenu()
 { }
-
