@@ -4,8 +4,23 @@
 #include<iomanip>
 #include<string>
 using namespace std;
+#define MAX_BOOKS 50
 int userChoice;
-
+struct Book {
+    int code;
+    string name;
+    string category;
+    string author;
+    int edition;
+    bool isAvailable; // true if available, false if borrowed
+};
+struct Student {
+    int id;
+    string name;
+    string password;
+    int borrowedBooks[MAX_BOOKS]; // Array storing book codes
+    int borrowedCount=0; // Number of books borrowed
+};
 void menu(), login(), registeration(), adminmenu();
 int main()
 {
