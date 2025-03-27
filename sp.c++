@@ -4,18 +4,52 @@
 #include<iomanip>
 #include<string>
 using namespace std;
+<<<<<<< HEAD
 int userChoice;
 void menu(), login(), registeration(),changepassward();
 int borrowbook();
+=======
+#define MAX_BOOKS 50
+int userChoice;
+char confirm;
+
+struct Book {
+    int code;
+    string name;
+    string category;
+    string author;
+    int edition;
+    bool isAvailable; // true if available, false if borrowed
+};
+struct Student {
+    int id;
+    string name;
+    string password;
+    int borrowedBooks[MAX_BOOKS];
+    int borrowedCount = 0; // Number of books borrowed
+};
+void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid();
+void Invalid()//if the user entered an invalid oprtion
+{
+    cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
+    cin >> confirm;
+    while ((confirm != 'y' && confirm != 'Y') && (confirm != 'n' && confirm != 'N'))
+    {
+        cout << '\n';
+        cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
+        cin >> confirm;
+    }
+}
+>>>>>>> 0e61c359631f0c2e0c0f38f20593d94551f0838a
 int main()
 {
     menu();
     return 0;
 }
 void menu()
-{
-    cout << "Welcome to University Library System\n";
-    cout << setw(30) << setfill('-') << "\n";
+{   //home page that appears in the first program
+    cout << right << setw(50) << "Welcome to University Library System\n"<<" ";
+    cout << right << setw(50) << setfill('-') << " "<<'\n';
     cout << "1. Student log in \n";
     cout << "2. Admin log in \n";//mmmmm
     cout << "3. Register\n";
@@ -27,7 +61,7 @@ void menu()
     case 1:login();
         break;
 
-    case 2:;
+    case 2: adminmenu();
         break;
     case 3: registeration();
         break;
@@ -35,23 +69,59 @@ void menu()
         return;
         break;
     default:
-        cout << "Invalid Number!! Do you want to return a home page ?(y/n) ";
-        char confirm;
-        cin >> confirm;
-        if (confirm == 'y') menu();
+        Invalid();
+        if (confirm == 'y' || confirm == 'Y') menu();
         else return;
         break;
     }
 }
 void registeration()
 {
-    
+
 }
 void login()
 {
 
 }
+<<<<<<< HEAD
 void changepassward()
 {
 
 }
+=======
+void adminmenu()
+{
+}
+void studentDashboard() //Student Dashboard 
+{
+    Student stud;
+    cout << right << setw(50) << "Welcome!! " << stud.name << '!\n';
+    cout << "1. View all my books \n";
+    cout << "2. Search for a certain book \n";
+    cout << "3. Edit my profile \n";
+    cout << "4. View my borrowed books \n";
+    cout << "5. Changed password \n";
+    cout << "6. Log out \n";
+    cout << "Enter your choice from (1 => 6) : ";
+    cin >> userChoice;
+    switch (userChoice) {
+    case 1:;
+        break;
+    case 2:
+        break;
+    case 3:;
+        break;
+    case 4:;
+        break;
+    case 5:;
+        break;
+    case 6:;
+        break;
+    default:
+        Invalid();
+        if (confirm == 'y' || confirm == 'Y') studentDashboard();
+        else return;
+        break;
+    }
+}//maaallalala
+>>>>>>> 0e61c359631f0c2e0c0f38f20593d94551f0838a
