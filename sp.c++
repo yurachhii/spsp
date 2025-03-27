@@ -4,9 +4,9 @@
 #include<iomanip>
 #include<string>
 using namespace std;
-<<<<<<< HEAD
 int userChoice;
-void menu(), login(), registeration();
+void menu(), login(), registeration(),changepassward();
+int borrowbook();
 int main()
 {
     menu();
@@ -17,11 +17,11 @@ void menu()
     cout << "Welcome to University Library System\n";
     cout << setw(30) << setfill('-') << "\n";
     cout << "1. Student log in \n";
-    cout << "2. Admin log in \n";
+    cout << "2. Admin log in \n";//mmmmm
     cout << "3. Register\n";
     cout << "4. Exit \n";
     cout << "Enter your choice between (1-4) : ";
-    cin >> userChoice;
+    cin >>userChoice;
     switch (userChoice)
     {
     case 1:login();
@@ -51,4 +51,7 @@ void login()
 {
 
 }
-///test
+void changepassward()
+{
+
+}
