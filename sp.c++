@@ -18,7 +18,7 @@ struct Student {
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BOOKS]; // Array storing book codes
+    int borrowedBooks[MAX_BOOKS]; 
     int borrowedCount=0; // Number of books borrowed
 };
 void menu(), login(), registeration(), adminmenu();
