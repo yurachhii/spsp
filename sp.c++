@@ -20,20 +20,20 @@ struct Student {
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BOOKS]; 
-    int borrowedCount=0; // Number of books borrowed
+    int borrowedBooks[MAX_BOOKS];
+    int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(),studentDashboard(),Invalid();
+void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid();
 void Invalid()//if the user entered an invalid oprtion
 {
-    cout<<"Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";  
-        cin>>confirm;
-        while ((confirm != 'y' && confirm != 'Y' )&& (confirm != 'n' && confirm != 'N')) 
-        {
-            cout << '\n';
-            cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
-            cin >> confirm;
-        }
+    cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
+    cin >> confirm;
+    while ((confirm != 'y' && confirm != 'Y') && (confirm != 'n' && confirm != 'N'))
+    {
+        cout << '\n';
+        cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
+        cin >> confirm;
+    }
 }
 int main()
 {
@@ -42,14 +42,14 @@ int main()
 }
 void menu()
 {   //home page that appears in the first program
-    cout << "Welcome to University Library System\n";
-    cout << setw(30) << setfill('-') << "\n";
+    cout << right << setw(50) << "Welcome to University Library System\n"<<" ";
+    cout << right << setw(50) << setfill('-') << " "<<'\n';
     cout << "1. Student log in \n";
     cout << "2. Admin log in \n";
     cout << "3. Register\n";
     cout << "4. Exit \n";
     cout << "Enter your choice between (1-4) : ";
-    cin >> userChoice; 
+    cin >> userChoice;
     switch (userChoice)
     {
     case 1:login();
@@ -78,37 +78,37 @@ void login()
 
 }
 void adminmenu()
-{ }
+{
+}
 void studentDashboard() //Student Dashboard 
 {
     Student stud;
-    cout<<"Welcome!! "<<stud.name<<'!\n';
-    cout<<"1. View all my books \n";
-    cout<<"2. Search for a certain book \n";
-    cout<<"3. Edit my profile \n";
-    cout<<"4. View my borrowed books \n";
-    cout<<"5. Changed password \n";
-    cout<<"6. Log out \n";
-    cout<<"Enter your choice from (1 => 6) : ";
-    cin>>userChoice;
-    switch (userChoice){
-        case 1: ;
+    cout << right << setw(50) << "Welcome!! " << stud.name << '!\n';
+    cout << "1. View all my books \n";
+    cout << "2. Search for a certain book \n";
+    cout << "3. Edit my profile \n";
+    cout << "4. View my borrowed books \n";
+    cout << "5. Changed password \n";
+    cout << "6. Log out \n";
+    cout << "Enter your choice from (1 => 6) : ";
+    cin >> userChoice;
+    switch (userChoice) {
+    case 1:;
         break;
-        case 2 :
+    case 2:
         break;
-        case 3: ;
+    case 3:;
         break;
-        case 4: ;
+    case 4:;
         break;
-        case 5: ;
+    case 5:;
         break;
-        case 6: ;
+    case 6:;
         break;
-        default :
+    default:
         Invalid();
         if (confirm == 'y' || confirm == 'Y') studentDashboard();
         else return;
         break;
     }
-}
-//ihope you understand
+}//maaallalala
