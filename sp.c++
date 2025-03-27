@@ -6,6 +6,8 @@
 using namespace std;
 #define MAX_BOOKS 50
 int userChoice;
+char confirm;
+
 struct Book {
     int code;
     string name;
@@ -21,7 +23,18 @@ struct Student {
     int borrowedBooks[MAX_BOOKS]; 
     int borrowedCount=0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu();
+void menu(), login(), registeration(), adminmenu(),studentDashboard(),Invalid();
+void Invalid()//if the user entered an invalid oprtion
+{
+    cout<<"Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";  
+        cin>>confirm;
+        while ((confirm != 'y' && confirm != 'Y' )&& (confirm != 'n' && confirm != 'N')) 
+        {
+            cout << '\n';
+            cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
+            cin >> confirm;
+        }
+}
 int main()
 {
     menu();
@@ -50,16 +63,7 @@ void menu()
         return;
         break;
     default:
-        cout << "Invalid Number!! Do you want to return a home page ?(y/n) "; //what if he didnot give us the right answer?
-        char confirm;
-        cin >> confirm;
-        //I handle it with loop if he didnot give us the right answer
-        while ((confirm != 'y' && confirm != 'Y' )&& (confirm != 'n' && confirm != 'N')) 
-        {
-            cout << '\n';
-            cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
-            cin >> confirm;
-        }
+        Invalid();
         if (confirm == 'y' || confirm == 'Y') menu();
         else return;
         break;
@@ -75,3 +79,35 @@ void login()
 }
 void adminmenu()
 { }
+void studentDashboard() //Student Dashboard 
+{
+    Student stud;
+    cout<<"Welcome!! "<<stud.name<<'!\n';
+    cout<<"1. View all my books \n";
+    cout<<"2. Search for a certain book \n";
+    cout<<"3. Edit my profile \n";
+    cout<<"4. View my borrowed books \n";
+    cout<<"5. Changed password \n";
+    cout<<"6. Log out \n";
+    cout<<"Enter your choice from (1 => 6) : ";
+    cin>>userChoice;
+    switch (userChoice){
+        case 1: ;
+        break;
+        case 2 :
+        break;
+        case 3: ;
+        break;
+        case 4: ;
+        break;
+        case 5: ;
+        break;
+        case 6: ;
+        break;
+        default :
+        Invalid();
+        if (confirm == 'y' || confirm == 'Y') studentDashboard();
+        else return;
+        break;
+    }
+}
