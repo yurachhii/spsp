@@ -23,7 +23,7 @@ struct StudentUser {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(),viewallbooks() studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+void menu(), login(), registeration(), adminmenu(),viewallbooks(), searchbook(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -115,8 +115,17 @@ void studentDashboard() //Student Dashboard
 void viewallbooks()
 {
     cout<<"Library books:\n";
-    
+    //iam waiting for the books file to be ready to do my task , and i want yasmean to put these books into a loop so i can use it in my functions
 
+
+
+
+
+
+}
+void searchbook()
+{
+    ///ttttt
 
 
 
