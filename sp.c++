@@ -4,8 +4,6 @@
 #include<string>
 using namespace std;
 int userChoice;
-void menu(), login(), registeration(),changepassward();
-int borrowbook();
 #define MAX_BOOKS 50
 int userChoice;
 char confirm;
@@ -22,7 +20,7 @@ struct StudentUser {
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BOOKS];
+    bool borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
 void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook();
@@ -117,10 +115,10 @@ void studentDashboard() //Student Dashboard
         else return;
         break;
     }
-<<<<<<< HEAD
+
 }//maaallalala
-=======
-}
+
+
 void borrowbook()
 {
     BookUser book;
@@ -168,4 +166,7 @@ void viewMyBook()
         cout<<"It's Borrowd at certain time\n ";
     }
 }
->>>>>>> fe236c9bf71df721ba617b745f982eae0b753e33
+void returnBook()
+{
+
+}
