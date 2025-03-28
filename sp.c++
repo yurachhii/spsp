@@ -22,7 +22,7 @@ struct StudentUser {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook();
+void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -102,7 +102,7 @@ void studentDashboard() //Student Dashboard
         break;
     case 5:;
         break;
-    case 6:;
+    case 6:menu();
         break;
     default:
         Invalid();
@@ -146,7 +146,7 @@ void viewMyBook()
             {
                 case 1: borrowbook();
                 break;
-                case 2: ;
+                case 2: studentDashboard() ;
                 break;
                 default :
                 Invalid();
@@ -157,4 +157,8 @@ void viewMyBook()
     else {
         cout<<"It's Borrowd at certain time\n ";
     }
+}
+void returnBook()
+{
+
 }
