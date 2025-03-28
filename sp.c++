@@ -83,7 +83,7 @@ void studentDashboard() //Student Dashboard
 {
     StudentUser stud;
     cout << right << setw(50) << "Welcome!! " << stud.name << '!\n';
-    cout << "1. View all my books \n";
+    cout << "1. View all books \n";
     cout << "2. Search for a certain book \n";
     cout << "3. Edit my profile \n";
     cout << "4. View my borrowed books \n";
