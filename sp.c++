@@ -14,7 +14,7 @@ struct BookUser {
     string author;
     int edition;
     bool isAvailable=1; // true if available false if borrowed
-};
+}Bookuser book[MAX_BOOKS];
 struct StudentUser {
     int id;
     string name;
@@ -22,7 +22,7 @@ struct StudentUser {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+void menu(), login(), registeration(), adminmenu(),viewallbooks() studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -110,6 +110,17 @@ void studentDashboard() //Student Dashboard
         else return;
         break;
     }
+}
+void viewallbooks()
+{
+    cout<<"Library books:\n";
+    
+
+
+
+
+
+
 }
 void borrowbook()
 {
