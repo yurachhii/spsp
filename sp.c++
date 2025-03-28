@@ -14,7 +14,7 @@ struct Book {
     string category;
     string author;
     int edition;
-    bool isAvailable; // true if available, false if borrowed
+    bool isAvailable=1; // true if available, false if borrowed
 };
 struct Student {
     int id;
@@ -23,7 +23,7 @@ struct Student {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid();
+void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -111,4 +111,35 @@ void studentDashboard() //Student Dashboard
         else return;
         break;
     }
-}//maaallalala
+}
+void viewMyBook()
+{
+    Book details;//details should be an array but waiting for Maluka to add books on a loop 
+    cout<<"\t ---Book Details--- \t\n";
+    cout<<"Title : "<<details.name<<'\n';
+    cout<<"Author : "<<details.author<<'\n';
+    cout<<"Catagory : "<<details.category<<'\n';
+    cout<<"Edition : "<<details.edition<<'\n';
+    cout<<"Status [Avaliable/Borrowed]: ";
+    if (details.isAvailable){
+        cout<<"It's avaliable \n\n";
+        cout<<"1. Borrow this book \n";
+        cout<<"1.Back to list\n";
+        cout<<"Enter your choice: ";
+        cin>>userChoice;
+            switch (userChoice)
+            {
+                case 1: ;
+                break;
+                case 2: ;
+                break;
+                default :
+                Invalid();
+                if (confirm=='y'||confirm=='Y') viewMyBook();
+                else return;
+            }
+    }
+    else {
+        cout<<"It's Borrowd at certain time\n ";
+    }
+}
