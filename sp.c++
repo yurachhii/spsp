@@ -13,7 +13,7 @@ struct BookUser {
     string category;
     string author;
     int edition;
-    bool isAvailable=1; // true if available, false if borrowed
+    bool isAvailable=1; // true if available false if borrowed
 };
 struct StudentUser {
     int id;
