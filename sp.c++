@@ -4,11 +4,9 @@
 #include<iomanip>
 #include<string>
 using namespace std;
-<<<<<<< HEAD
 int userChoice;
 void menu(), login(), registeration(),changepassward();
 int borrowbook();
-=======
 #define MAX_BOOKS 50
 int userChoice;
 char confirm;
@@ -40,7 +38,6 @@ void Invalid()//if the user entered an invalid oprtion
         cin >> confirm;
     }
 }
->>>>>>> 0e61c359631f0c2e0c0f38f20593d94551f0838a
 int main()
 {
     menu();
@@ -83,12 +80,10 @@ void login()
 {
 
 }
-<<<<<<< HEAD
 void changepassward()
 {
 
 }
-=======
 void adminmenu()
 {
 }
@@ -124,4 +119,3 @@ void studentDashboard() //Student Dashboard
         break;
     }
 }//maaallalala
->>>>>>> 0e61c359631f0c2e0c0f38f20593d94551f0838a
