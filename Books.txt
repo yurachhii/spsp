@@ -2,13 +2,19 @@ Novel
 Zikola Land  
 Omar Abdelhamid  
 1001  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Amarita  
 Omar Abdelhamid  
 1002  
+<<<<<<< HEAD
 1  
 1  
 
@@ -54,262 +60,483 @@ Hanan Lashin
 1  
 1  
 
+=======
+1
+1
+Novel  
+The Forgotten Wolves Valley  
+Omar Abdelhamid  
+1003
+1
+1
+Novel  
+The Sapphire Girl  
+Omar Abdelhamid  
+1004
+1
+1
+Novel  
+Garten Rules  
+Omar Abdelhamid  
+1005
+1
+1
+Novel
+Shamo Beats  
+Omar Abdelhamid  
+1006
+1
+1
+Novel  
+Akma Waves  
+Omar Abdelhamid  
+1007
+1
+1
+Novel  
+Ikadoli  
+Hanan Lashin  
+1008
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Amanos  
 Hanan Lashin  
 1009  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Opal  
 Hanan Lashin  
 1010  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Koykol  
 Hanan Lashin  
 1011  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Soqotra  
 Hanan Lashin  
 1012  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Sirosh  
 Hanan Lashin  
 1013  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Abadol  
 Hanan Lashin  
 1014  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Stranger Jasmine  
 Khawla Hamdi  
 1015  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Jasmine's Return  
 Khawla Hamdi  
 1016  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 White Jasmine  
 Khawla Hamdi  
 1017  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 In My Heart, A Hebrew Girl  
 Khawla Hamdi  
 1018  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 What We Don't Confess  
 Sandra Siraj  
 1019  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 What If  
 Sandra Siraj  
 1020  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 What the Sea Told  
 Sandra Siraj  
 1021  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 To Infinity  
 Sandra Siraj  
 1022  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Butcher  
 Hassan El-Gendy  
 1023  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The City of the Dead  
 Hassan El-Gendy  
 1024  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Return  
 Hassan El-Gendy  
 1025  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Days with the Pasha  
 Hassan El-Gendy  
 1026  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Watching  
 Hassan El-Gendy  
 1027  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Mystery of Room 207  
 Ahmed Khaled Tawfik  
 1028  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Utopia  
 Ahmed Khaled Tawfik  
 1029  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 In the Rats’ Corridor  
 Ahmed Khaled Tawfik  
 1030  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Antichristos  
 Ahmed Khaled Mostafa  
 1031  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Letters from God  
 Adham Sharkawy  
 1032  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 With the Prophet  
 Adham Sharkawy  
 1033  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Let My Heart Be at Peace  
 Adham Sharkawy  
 1034  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Letters from the Quran  
 Adham Sharkawy  
 1035  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Psychological Sessions  
 Mohamed Ibrahim  
 1036  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Your Psychological Complexes Are Your Eternal Prison  
 Youssef Hosni  
 1037  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Great Gatsby  
 F. Scott Fitzgerald  
 1038  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 To Kill a Mockingbird  
 Harper Lee  
 1039  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 1984  
 George Orwell  
 1040  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Pride and Prejudice  
 Jane Austen  
 1041  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Catcher in the Rye  
 J.D. Salinger  
 1042  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Moby Dick  
 Herman Melville  
 1043  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Brave New World  
 Aldous Huxley  
 1044  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Crime and Punishment  
 Fyodor Dostoevsky  
 1045  
+<<<<<<< HEAD
 1  
 1  
 
@@ -320,31 +547,61 @@ Leo Tolstoy
 1  
 1  
 
+=======
+1
+1
+Novel  
+War and Peace  
+Leo Tolstoy  
+1046
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 The Brothers Karamazov  
 Fyodor Dostoevsky  
 1047  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Dracula  
 Bram Stoker  
 1048  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Frankenstein  
 Mary Shelley  
 1049  
+<<<<<<< HEAD
 1  
 1  
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
 Novel  
 Don Quixote  
 Miguel de Cervantes  
 1050  
+<<<<<<< HEAD
 1  
 1
 
+=======
+1
+1
+>>>>>>> 36b12f57bba693c23a4c31cf6fc9fe76d2b272b4
