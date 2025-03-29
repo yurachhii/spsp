@@ -3,19 +3,34 @@
 #include<fstream>
 #include<iomanip>
 #include<string>
-using namespace std;
 #define MAX_BOOKS 50
-int userChoice;
-char confirm;
+using namespace std;
+//for admin log in function
+bool loginadmin();
+void adminmenu();
+void runLibrarySystem();
+//void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
+// to modify info (for admin)
 
-struct BookUser {
-    int code;
+
+struct Book{
+    string code;
     string name;
     string category;
     string author;
     int edition;
     bool isAvailable=1; // true if available false if borrowed
 };
+Book books[MAX_BOOKS];
+int NumberOfBooks = 0;
+void ModifyBook(Book& book), LoadBooksFromFile(), SaveBooksToFile(), displaymenu();
+int FindBook(string codebook);
+void GetCodeBook(), choice(int);
+void Run();
+string codebook;
+int userChoice;
+char confirm;
+
 struct StudentUser {
     int id;
     string name;
@@ -23,7 +38,7 @@ struct StudentUser {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -40,6 +55,185 @@ int main()
     menu();
     return 0;
 }
+//for admin log in
+
+void runLibrarySystem() {
+    if (loginadmin()) {
+        adminmenu();
+    } else {
+        cout << "Log In Failed!\n";
+    }
+}
+
+bool loginadmin() {
+    string adminpassword = "admin2006", enteredpassword;
+    int attemp = 4;
+    do {
+        cout << "Enter Admin's password: ";
+        cin >> enteredpassword;
+        if (enteredpassword == adminpassword) {
+            return true;
+        } else {
+            attemp--;
+            cout << "WRONG PASSWORD!\n ATTEMPTS LEFT: " << attemp << endl;
+        }
+    } while (attemp > 0);
+    return false;
+}
+
+void adminmenu() {
+    cout << "Welcome, Admin.\n";
+    cout << "*********************\n";
+    cout << "1) View Books.\n";
+    cout << "2) Add New Books.\n";
+    cout << "3) Delete Books.\n";
+    cout << "4) Modify Information About Books.\n";
+    cout << "5) Manage Order Of Books.\n";
+    cout << "--------------------------------------------\n";
+    cout << "Please, Select What You Want (From 1 TO 5): ";
+
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+        case 1:
+            // menubooks();
+            break;
+        case 2:
+            // addbooks();
+            break;
+        case 3:
+            // deletebooks();
+            break;
+        case 4:
+               Run();
+            break;
+        case 5:
+            // orderbook();
+            break;
+        default:
+            cout << "Invalid choice!\n";
+    }
+}
+
+// the second task for admin modify
+
+void Run() {
+    LoadBooksFromFile();
+    int userchoice;
+    do {
+        displaymenu();
+        cout << "Enter Your Choice: ";
+        cin >> userchoice;
+        choice(userchoice);
+    } while (userchoice != 2);
+    SaveBooksToFile();
+}
+void LoadBooksFromFile() {
+    ifstream fileBooks("Books.txt");
+    NumberOfBooks = 0;
+    while (NumberOfBooks < MAX_BOOKS) {
+        getline(fileBooks, books[NumberOfBooks].category);
+        getline(fileBooks, books[NumberOfBooks].name);
+        getline(fileBooks, books[NumberOfBooks].author);
+        getline(fileBooks, books[NumberOfBooks].code);
+        fileBooks >> books[NumberOfBooks].isAvailable;
+        fileBooks >> books[NumberOfBooks].edition;
+        NumberOfBooks++;
+        fileBooks.ignore();
+    }
+    fileBooks.close();
+}
+void SaveBooksToFile() {
+    //save data to file
+}
+
+void displaymenu() {
+    cout << "\n------Library Management System------\n";
+    cout << "1. Modify Book\n";
+    cout << "2. Exit\n";
+}
+void choice(int choice) {
+    switch (choice) {
+    case 1:
+        GetCodeBook();
+        break;
+    case 2:
+        cout << "Exiting....\n";
+        break;
+    default:
+        cout << "Invalid choice, try again.\n";
+    }
+}
+
+int FindBook(string code) {
+    for (int i = 0; i < NumberOfBooks; i++) {
+        if (books[i].code == codebook) {   //search if book exist or not
+            return i;
+        }
+    }
+    return -1;
+}
+void GetCodeBook() {
+    cout << "Enter The Code Of The Book Which You Want To Modify Information About It : ";
+    cin >> codebook;
+    int index = FindBook(codebook);
+    if (index == -1) {
+        cout << "Book not found.\n";
+    }
+    else {
+        ModifyBook(books[index]);
+    }
+}
+
+
+void ModifyBook(Book& book) {
+    int choice;
+    do {
+        cout << "\n------Modify Book------\n";
+        cout << "1. Modify Name\n";
+        cout << "2. Modify Author\n";
+        cout << "3. Modify Category\n";
+        cout << "4. Modify Edition\n";
+        cout << "5. Modify Availability\n";
+        cout << "6. Back\n";
+        cout << "Enter your choice : ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter New Name: ";
+            cin.ignore(); // to ignore "Enter".
+            getline(cin, book.name);  //used for long strings
+            break;
+        case 2:
+            cout << "Enter New Author: ";
+            cin.ignore();
+            getline(cin, book.author);
+            break;
+        case 3:
+            cout << "Enter New Category: ";
+            cin.ignore();
+            getline(cin, book.category);
+            break;
+        case 4:
+            cout << "Enter New Edition: ";
+            cin >> book.edition;
+            break;
+        case 5:
+            cout << "Enter Availability ( 1 for available, 0 for not available): ";
+            cin >> book.isAvailable;
+            break;
+        case 6:
+            cout << "Returning to menu....\n";
+            break;
+        default:
+            cout << "Invalid choice,try again.\n";
+        }
+    } while (choice != 6);
+}
+
+
 void menu()
 {   //home page that appears in the first program
     cout << right << setw(50) << "Welcome to University Library System\n"<<" ";
@@ -55,7 +249,7 @@ void menu()
     case 1:login();
         break;
 
-    case 2: adminmenu();
+    case 2: runLibrarySystem();
         break;
     case 3: registeration();
         break;
@@ -77,9 +271,9 @@ void login()
 {
 
 }
-void adminmenu()
+/*void adminmenu()
 {
-}
+}*/
 void studentDashboard() //Student Dashboard 
 {
     StudentUser stud;
@@ -114,7 +308,7 @@ void studentDashboard() //Student Dashboard
 }
 void borrowbook()
 {
-    BookUser book;
+    Book book;
     StudentUser stud;
     cout<<"Borrowing book process\n";
     cout<<"Enter your name : ";
@@ -130,7 +324,7 @@ void borrowbook()
 }
 void viewMyBook()
 {
-    BookUser details;//details should be an array but waiting for Maluka to add books on a loop 
+    Book details;//details should be an array but waiting for Maluka to add books on a loop 
     cout<<"\t ---Book Details--- \t\n";
     cout<<"Title : "<<details.name<<'\n';
     cout<<"Author : "<<details.author<<'\n';
@@ -165,81 +359,7 @@ void returnBook()
 }
 
 
-//==============
-
-//i will solve it
 
 
-#include <iostream>
-using namespace std;
-bool loginadmin ();
-void adminmenu();
-//void menubooks(),addbooks(),deletebooks(),modifyinfo(),orderbook();
-int main(){
-  bool result;
-  result=loginadmin();
-  if (result){
-    adminmenu();
-  }else{
-    cout<<"Log In Failed!\n"; //suppose returning to the main menu 
-  }
-  return 0;
-}
-bool loginadmin (){
-    string adminpassword="admin2006",enteredpassword;
-    int attemp=4;
-        do{ 
-            cout<<"Enter Admin's password : ";
-    cin>>enteredpassword;
-    if (enteredpassword==adminpassword){
-        return true;
-    }
-    else{
-        attemp--;
-        cout<<"WRONG PASSWORD!\n ATTEMPS LEFT : "<<attemp<<endl;
-        }
-         } while(attemp>0); 
-         return false;
-}
-void adminmenu(){
-    cout<<"Welcome,Admin.\n";
-    cout<<"*********************.\n";
-    cout<<"1) View Books.\n";
-    cout<<"2) Add New Books.\n"; //function mariam ahmed
-    cout<<"3) Delete books.\n";  //function mariam ahmed
-    cout<<"4) Modify Information About Books.\n";
-    cout<<"5) Manage Order Of Books.\n";
-    //cout<<"6) Log Out.\n"; //not request
-    cout<<"--------------------------------------------\n";
-    cout<<"Please, Select What You Want (From 1 TO 5) : ";
-    int choice;
-    cin>>choice;
-    //other function
-    cout<<"Handling Your Request....\n";
-    switch (choice)
-    {
-    case 1:
-          
-          //menubooks();
-        break;
-    case 2:
-          
-          //addbooks();
-          break;
-    case 3:
-        
-          //deletebooks();
-          break;
-    case 4:
-          
-          //modifyinfo();
-          break;
-    case 5:
-    
-          //orderbook();
-          break;
-    default:
-          cout<<"Invalid choice!\n";
-    }
-}
-//>>>>>> admin1
+
+
