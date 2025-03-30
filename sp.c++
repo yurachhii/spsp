@@ -1,4 +1,3 @@
-// >>>>>HEAD
 #include<iostream>
 #include<fstream>
 #include<iomanip>
@@ -24,7 +23,7 @@ struct StudentUser {
     bool borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changepass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -78,7 +77,7 @@ void login()
 {
 
 }
-void changepassward()
+void changepass()
 {
 
 }
@@ -170,9 +169,6 @@ void viewMyBook()
 void returnBook()
 {
 
-<<<<<<< HEAD
-}
-=======
 }
 
 
@@ -254,4 +250,3 @@ void adminmenu(){
     }
 }
 //>>>>>> admin1
->>>>>>> 6929117a55b028c0f1ee2c8eea7fc0abac9702f1
