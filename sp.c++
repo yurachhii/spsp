@@ -5,6 +5,8 @@
 #include<string>
 using namespace std;
 #define MAX_BOOKS 50
+#define MAX_BORROW 10
+#define MAX_STUEDENT 20
 int userChoice;
 char confirm;
 
