@@ -27,6 +27,9 @@ struct Book{
     string author;
     int edition;
     bool isAvailable=1; // true if available false if borrowed
+<<<<<<< HEAD
+}Bookuser book[MAX_BOOKS];
+=======
 };
 struct StudentUser {
     int id;
@@ -45,8 +48,27 @@ string codebook;
 int userChoice;
 char confirm;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
+struct StudentUser {
+    int id;
+    string name;
+    string password;
+    int borrowedBooks[MAX_BOOKS];
+    int borrowedCount = 0; // Number of books borrowed
+};
+<<<<<<< HEAD
+<<<<<<< HEAD
+void menu(), login(), registeration(), adminmenu(),viewallbooks(), searchbook(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+=======
+void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+>>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
+=======
+>>>>>>> 1381612976ffe9f343e27fe2c0cc7dc69dac518a
 void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBorrowedBook(),borrowbook(),changePass();
+>>>>>>> 63d54501f0adfecca4e841c2bfa46274dfd0aa6a
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -54,7 +76,7 @@ void Invalid()//if the user entered an invalid oprtion
     while ((confirm != 'y' && confirm != 'Y') && (confirm != 'n' && confirm != 'N'))
     {
         cout << '\n';
-        cout << "Invalid option please Enter (y for yes) or (n for no)whatever it's an upper case or lower :";
+        cout << "Invalid option please Enter (y for yes) or (n for no) whatever it's an upper case or lower :";
         cin >> confirm;
     }
 }
@@ -316,6 +338,49 @@ void studentDashboard() //Student Dashboard
         else return;
         break;
     }
+}
+void viewallbooks()
+{
+    cout<<"Library books:\n";
+    for(int i=0;i<MAX_BOOKS;i++)
+    {
+        cout<<i+1"."<<" book:" <<books[i].name<<endl;
+        if(books[i].isAvailable==1)
+            cout<<"Available"<<endl;
+        else
+            cout<<"Not Available"<<endl;
+    }
+    cout<<"1- search for a certain book. \n";
+    cout<<"2- view my borrowed books \n";
+    cout<<"3- go back to menu \n";
+    cin >> userChoice;
+    switch (userChoice)
+     {
+    case 1:searchbook();
+        break;
+    case 2:viewMyBorrowedBook();
+        break;
+    case 3:menu();
+        break;
+     default:
+        Invalid();
+        if (confirm == 'y' || confirm == 'Y') studentDashboard();
+        else return;
+        break;
+     } 
+
+
+
+
+}
+void searchbook()
+{
+    ///ttttt
+
+
+
+
+
 }
 void borrowbook()
 {
