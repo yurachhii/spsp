@@ -45,7 +45,7 @@ struct StudentUser {
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
+void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBorrowedBook(),borrowbook(),changePass();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -289,8 +289,9 @@ void studentDashboard() //Student Dashboard
     cout << "2. Search for a certain book \n";
     cout << "3. Edit my profile \n";
     cout << "4. View my borrowed books \n";
-    cout << "5. Changed password \n";
-    cout << "6. Log out \n";
+    cout<<"5.Return my book \n";
+    cout << "6. Changed password \n";
+    cout << "7. Log out \n";
     cout << "Enter your choice from (1 => 6) : ";
     cin >> userChoice;
     switch (userChoice) {
@@ -300,11 +301,13 @@ void studentDashboard() //Student Dashboard
         break;
     case 3:;
         break;
-    case 4:;
+    case 4:viewMyBorrowedBook();
         break;
-    case 5:;
+    case 5 : ;
+    break;
+    case 6:;
         break;
-    case 6:menu();
+    case 7:menu();
         break;
     default:
         Invalid();
@@ -329,7 +332,7 @@ void borrowbook()
     stud.borrowedCount++;
 
 }
-void viewMyBook()
+void viewMyBorrowedBook()
 {
     Book details;//details should be an array but waiting for Maluka to add books on a loop 
     cout<<"\t ---Book Details--- \t\n";
@@ -352,7 +355,7 @@ void viewMyBook()
                 break;
                 default :
                 Invalid();
-                if (confirm=='y'||confirm=='Y') viewMyBook();
+                if (confirm=='y'||confirm=='Y') viewMyBorrowedBook();
                 else menu();
             }
     }
