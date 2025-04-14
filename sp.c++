@@ -2,11 +2,8 @@
 #include<fstream>
 #include<iomanip>
 #include<string>
-<<<<<<< HEAD
 using namespace std;
 int userChoice;
-=======
->>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
 #define MAX_BOOKS 50
 using namespace std;
 //for admin log in function
@@ -42,11 +39,8 @@ struct StudentUser {
     bool borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
-<<<<<<< HEAD
-void menu(), login(), registeration(), adminmenu(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changepass();
-=======
-void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
->>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
+void menu(), login(), registeration(), adminmenu(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changepass();
+void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -279,17 +273,13 @@ void login()
 {
 
 }
-<<<<<<< HEAD
 void changepass()
 {
 
 }
 void adminmenu()
-=======
-/*void adminmenu()
->>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
-{
-}*/
+{}
+
 void studentDashboard() //Student Dashboard 
 {
     StudentUser stud;
