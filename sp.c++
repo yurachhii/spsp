@@ -5,6 +5,12 @@
 using namespace std;
 int userChoice;
 #define MAX_BOOKS 50
+// <<<<<<< HEAD
+#define MAX_BORROW 10
+#define MAX_STUEDENT 20
+int userChoice;
+char confirm;
+// =======
 using namespace std;
 //for admin log in function
 bool loginadmin();
@@ -12,6 +18,7 @@ void adminmenu();
 void runLibrarySystem();
 //void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
 // to modify info (for admin)
+// >>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
 
 
 struct Book{
@@ -39,8 +46,12 @@ struct StudentUser {
     bool borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
 };
+<<<<<<< HEAD
 void menu(), login(), registeration(), adminmenu(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changepass();
 void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook();
+=======
+void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBorrowedBook(),borrowbook(),changePass();
+>>>>>>> 63d54501f0adfecca4e841c2bfa46274dfd0aa6a
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -284,12 +295,13 @@ void studentDashboard() //Student Dashboard
 {
     StudentUser stud;
     cout << right << setw(50) << "Welcome!! " << stud.name << '!\n';
-    cout << "1. View all my books \n";
+    cout << "1. View all books \n";
     cout << "2. Search for a certain book \n";
     cout << "3. Edit my profile \n";
     cout << "4. View my borrowed books \n";
-    cout << "5. Changed password \n";
-    cout << "6. Log out \n";
+    cout<<"5.Return my book \n";
+    cout << "6. Changed password \n";
+    cout << "7. Log out \n";
     cout << "Enter your choice from (1 => 6) : ";
     cin >> userChoice;
     switch (userChoice) {
@@ -299,11 +311,13 @@ void studentDashboard() //Student Dashboard
         break;
     case 3:;
         break;
-    case 4:;
+    case 4:viewMyBorrowedBook();
         break;
-    case 5:;
+    case 5 : ;
+    break;
+    case 6:;
         break;
-    case 6:menu();
+    case 7:menu();
         break;
     default:
         Invalid();
@@ -331,7 +345,7 @@ void borrowbook()
     stud.borrowedCount++;
 
 }
-void viewMyBook()
+void viewMyBorrowedBook()
 {
     Book details;//details should be an array but waiting for Maluka to add books on a loop 
     cout<<"\t ---Book Details--- \t\n";
@@ -354,7 +368,7 @@ void viewMyBook()
                 break;
                 default :
                 Invalid();
-                if (confirm=='y'||confirm=='Y') viewMyBook();
+                if (confirm=='y'||confirm=='Y') viewMyBorrowedBook();
                 else menu();
             }
     }
@@ -366,9 +380,3 @@ void returnBook()
 {
 
 }
-
-
-
-
-
-
