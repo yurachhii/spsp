@@ -27,9 +27,6 @@ struct Book{
     string author;
     int edition;
     bool isAvailable=1; // true if available false if borrowed
-<<<<<<< HEAD
-}Bookuser book[MAX_BOOKS];
-=======
 };
 Book books[MAX_BOOKS];
 int NumberOfBooks = 0;
@@ -38,26 +35,16 @@ int FindBook(string codebook);
 void GetCodeBook(), choice(int);
 void Run();
 string codebook;
-int userChoice;
-char confirm;
-
->>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
 struct StudentUser {
     int id;
     string name;
     string password;
     int borrowedBooks[MAX_BOOKS];
     int borrowedCount = 0; // Number of books borrowed
-};
-<<<<<<< HEAD
-<<<<<<< HEAD
-void menu(), login(), registeration(), adminmenu(),viewallbooks(), searchbook(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
-=======
-void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
->>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
-=======
+}stud;
+void menu(), login(), registeration(), adminmenu(),viewallbooks(), studentDashboard(), Invalid(),returnBook(),viewMyBook(),borrowbook(),changePass();
 void menu(), login(), registeration(), studentDashboard(), Invalid(),returnBook(),viewMyBorrowedBook(),borrowbook(),changePass();
->>>>>>> 63d54501f0adfecca4e841c2bfa46274dfd0aa6a
+string searchbook();
 void Invalid()//if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -296,7 +283,7 @@ void login()
 void studentDashboard() //Student Dashboard 
 {
     StudentUser stud;
-    cout << right << setw(50) << "Welcome!! " << stud.name << '!\n';
+    cout << right << setw(50) << "Welcome!! " << stud.name << '\n';
     cout << "1. View all books \n";
     cout << "2. Search for a certain book \n";
     cout << "3. Edit my profile \n";
@@ -363,39 +350,44 @@ void viewallbooks()
 
 }
 string searchbook()
-{   string bookname;
-    cout<<"write the name of the book you are looking for: \n"
+{   
+    string bookname;
+    cout<<"write the name of the book you are looking for: \n";
     getline(cin,bookname);
     for(int i=0;i<MAX_BOOKS;i++)
     {
         if(bookname==books[i].name)
         {
-            if(books[i].isAvailable==1){
+            if(books[i].isAvailable==1)
+            {
                 cout<<"the book is available.\n";
                 cout<<"Do you want to borrow this book?\n";
                 cin>>userChoice;
-                if(userChoice=='y'||userChoice=='Y'){
-                   
+                if(confirm=='y'||confirm=='Y')
+                {
                     return bookname;
                 }
 
             }
-            else{
+            else
+            {
             cout<<"the book is not available.\n";
             cout<<"Do you want to search for another book?\n";
-            cin>>userchoice;
-            invalid();
-            if(userChoice=='y'||userChoice=='Y'){
+            cin>>confirm;
+            Invalid();
+            if(userChoice=='y'||userChoice=='Y')
+            {
                 searchbook();
             }
             else 
             studentDashboard();
-        }
-        }
+            }
+        }   
         else
-        {cout<<"Do you want to search for another book?\n";
-            cin>>userchoice;
-            invalid();
+        {
+            cout<<"Do you want to search for another book?\n";
+            cin>>confirm;
+            Invalid();
             if(userChoice=='y'||userChoice=='Y'){
                 searchbook();
             }
@@ -403,25 +395,28 @@ string searchbook()
             studentDashboard();
         }
     }
-
-
-
-
-
+    return bookname;
 }
 void borrowbook()
 {
     Book book;
-    StudentUser stud;
-    cout<<"Borrowing book process\n";
-    cout<<"Enter your name : ";
-    cin>>stud.name;
-    cout<<"Enter your ID : ";
-    cin>>stud.id;
-    //there is here a check if the name and ID of user is valid or not but waiting for registration strucute
-    //if info is already true ?
-    cout<<"You have borrowed "<<book.name<<'\n';
-    book.isAvailable=0;//it should be an array but waiting for the files and admin to add books
+    if(stud.borrowedCount>MAX_BORROW){
+        cout<<"You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
+            cout<<"Do you want to return book? :";
+            cin>>confirm;
+            Invalid();
+            if(confirm=='y'||confirm=='Y') 
+            {
+                //returnbook manar 
+            }
+            else 
+            studentDashboard();
+        }
+    ofstream fileborrowed("borrowed.txt");
+    fileborrowed.open("borrwed.txt");
+    fileborrowed<<searchbook()<<'\n';
+    fileborrowed.close();
+    book.isAvailable=0;
     stud.borrowedCount++;
 
 }
