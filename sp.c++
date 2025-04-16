@@ -56,7 +56,7 @@ void Invalid() // if the user entered an invalid oprtion
         cin >> confirm;
     }
 }
-void LoginStudent(), SignUp(), StudentUser();
+void LoginStudent(), SignUp(), studentuser();
 int main()
 {
     menu();
