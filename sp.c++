@@ -21,10 +21,10 @@ void runLibrarySystem();
 
 struct Book
 {
-    string code;
     string name;
     string category;
     string author;
+    int code;
     int edition;
     bool isAvailable = 1; // true if available false if borrowed
 };
@@ -381,7 +381,7 @@ void viewallbooks()
     cout << "Library books:\n";
     for (int i = 0; i < MAX_BOOKS; i++)
     {
-        cout << i + 1 << "." << " book:" << books[i].name << endl;
+        cout << books[i].code-1000 << "." << " book:" << books[i].name << endl;
         if (books[i].isAvailable == 1)
             cout << "Available" << endl;
         else
@@ -413,13 +413,14 @@ void viewallbooks()
 }
 void searchbook()
 {
-    string bookname;
-    cout << "write the name of the book you are looking for: \n";
-    getline(cin, bookname);
+    int bookcode=0;
+    cout << "write the code of the book you are looking for: \n";
+    cin>>bookcode;
+    bookcode+=1000;
     bool book_is_here=0,book_availability;
     for(int i=0;i<MAX_BOOKS;i++)
     {
-        if(bookname==books[i].name)
+        if(bookcode==books[i].code)
         {
             book_is_here=1;
             book_availability=books[i].isAvailable;
@@ -435,7 +436,7 @@ void searchbook()
                 cin >> userChoice;
                 if (confirm == 'y' || confirm == 'Y')
                 {
-                    borrowbook(bookname);
+                    borrowbook(bookcode);
                 }
             }
             else
@@ -466,7 +467,7 @@ void searchbook()
                 studentDashboard();
         }
     }
-void borrowbook(string &bookname)
+void borrowbook(int &bookcode)
 {
     Book book;
     //rowwww
