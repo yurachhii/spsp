@@ -150,7 +150,7 @@ void Run()
 }
 void LoadBooksFromFile()
 {
-    ifstream fileBooks("Books.txt");
+   /*  ifstream fileBooks("Books.txt");
     NumberOfBooks = 0;
     while (NumberOfBooks < MAX_BOOKS)
     {
@@ -164,10 +164,11 @@ void LoadBooksFromFile()
         fileBooks.ignore();
     }
     fileBooks.close();
+    */
 }
 void SaveBooksToFile()
 {
-    // save data to file
+   /*  // save data to file
     ofstream fileBooks("Books.txt");
 
     for (int i = 0; i < NumberOfBooks; i++)
@@ -180,7 +181,7 @@ void SaveBooksToFile()
         fileBooks << books[i].edition << endl;
     }
 
-    fileBooks.close();
+    fileBooks.close(); */
 }
 
 void displaymenu()
@@ -206,7 +207,7 @@ void choice(int choice)
 
 int FindBook(string code)
 {
-    int f = -1;
+    /* int f = -1;
     for (int i = 0; i < NumberOfBooks; i++)
     {
 
@@ -227,7 +228,7 @@ int FindBook(string code)
             break;
         }
     }
-    return f;
+    return f; */
 }
 void GetCodeBook()
 {
