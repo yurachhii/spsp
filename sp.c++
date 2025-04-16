@@ -44,8 +44,7 @@ struct StudentUser
     int borrowedCount = 0; // Number of books borrowed
 } stud;
 void menu(), login(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
-void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass();
-string searchbook();
+void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(),searchbook();
 void Invalid() // if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -412,23 +411,31 @@ void viewallbooks()
         break;
     }
 }
-string searchbook()
+void searchbook()
 {
     string bookname;
     cout << "write the name of the book you are looking for: \n";
     getline(cin, bookname);
-    for (int i = 0; i < MAX_BOOKS; i++)
+    bool book_is_here=0,book_availability;
+    for(int i=0;i<MAX_BOOKS;i++)
     {
-        if (bookname == books[i].name)
+        if(bookname==books[i].name)
         {
-            if (books[i].isAvailable == 1)
+            book_is_here=1;
+            book_availability=books[i].isAvailable;
+            break;
+        }
+    }
+    if(book_is_here)
+    {
+            if (book_availability)
             {
                 cout << "the book is available.\n";
                 cout << "Do you want to borrow this book?\n";
                 cin >> userChoice;
                 if (confirm == 'y' || confirm == 'Y')
                 {
-                    return bookname;
+                    borrowbook(bookname);
                 }
             }
             else
@@ -444,10 +451,11 @@ string searchbook()
                 else
                     studentDashboard();
             }
-        }
+         }
+    
         else
         {
-            cout << "Do you want to search for another book?\n";
+            cout << "You have entered unvalid book Do you want to search another book ? \n";
             cin >> confirm;
             Invalid();
             if (userChoice == 'y' || userChoice == 'Y')
@@ -458,13 +466,11 @@ string searchbook()
                 studentDashboard();
         }
     }
-    return bookname;
-}
-void borrowbook()
+void borrowbook(string &bookname)
 {
     Book book;
     //rowwww
-    
+
     if (stud.borrowedCount > MAX_BORROW)
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
@@ -480,7 +486,7 @@ void borrowbook()
     }
     ofstream fileborrowed("borrowed.txt");
     fileborrowed.open("borrwed.txt");
-    fileborrowed << searchbook() << '\n';
+    fileborrowed << bookname << '\n';
     fileborrowed.close();
     book.isAvailable = 0;
     stud.borrowedCount++;
