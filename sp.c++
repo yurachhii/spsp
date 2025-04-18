@@ -470,6 +470,7 @@ void searchbook()
 void borrowbook(int &bookcode)
 {
     Book book;
+    StudentUser stud;
     //rowwww
 
     if (stud.borrowedCount > MAX_BORROW)
@@ -485,12 +486,13 @@ void borrowbook(int &bookcode)
         else
             studentDashboard();
     }
-    ofstream fileborrowed("borrowed.txt");
-    fileborrowed.open("borrwed.txt");
-    fileborrowed << bookname << '\n';
-    fileborrowed.close();
-    book.isAvailable = 0;
-    stud.borrowedCount++;
+   for(int i=0;i<MAX_BOOKS;i++)
+   {
+    if(bookcode==books[i].code)
+    {
+        cout<<books[i].name;
+    }
+   }
 }
 void viewMyBorrowedBook()
 {
