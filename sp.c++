@@ -61,6 +61,41 @@ int main()
     menu();
     return 0;
 }
+void menu()
+{ // home page that appears in the first program
+    cout << right << setw(50) << "Welcome to University Library System\n"
+        << " ";
+    cout << right << setw(50) << setfill('-') << " " << '\n';
+    cout << "1. Student log in \n";
+    cout << "2. Admin log in \n";
+    cout << "3. Register\n";
+    cout << "4. Exit \n";
+    cout << "Enter your choice between (1-4) : ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case 1:
+        studentuser();
+        break;
+
+    case 2:
+        runLibrarySystem();
+        break;
+    case 3:
+        registeration();
+        break;
+    case 4:
+        return;
+        break;
+    default:
+        Invalid();
+        if (confirm == 'y' || confirm == 'Y')
+            menu();
+        else
+            return;
+        break;
+    }
+}
 // for student log in & register
 void LoadStudentFromFile(){
     ifstream fileStudents("student.txt");
@@ -400,48 +435,6 @@ void ModifyBook(Book &book)
             cout << "Invalid choice,try again.\n";
         }
     } while (choice != 6);
-}
-
-void menu()
-{ // home page that appears in the first program
-    cout << right << setw(50) << "Welcome to University Library System\n"
-        << " ";
-    cout << right << setw(50) << setfill('-') << " " << '\n';
-    cout << "1. Student log in \n";
-    cout << "2. Admin log in \n";
-    cout << "3. Register\n";
-    cout << "4. Exit \n";
-    cout << "Enter your choice between (1-4) : ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case 1:
-        studentuser();
-        break;
-
-    case 2:
-        runLibrarySystem();
-        break;
-    case 3:
-        registeration();
-        break;
-    case 4:
-        return;
-        break;
-    default:
-        Invalid();
-        if (confirm == 'y' || confirm == 'Y')
-            menu();
-        else
-            return;
-        break;
-    }
-}
-void registeration()
-{
-}
-void login()
-{
 }
 /*void adminmenu()
 {
