@@ -1,15 +1,12 @@
-// >>>>>HEAD
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <string>
 #define MAX_BOOKS 50
-// <<<<<<< HEAD
-#define MAX_BORROW 10
+#define MAX_BORROW 5
 #define MAX_STUEDENT 20
 int userChoice;
 char confirm;
-// =======
 using namespace std;
 // for admin log in function
 bool loginadmin();
@@ -17,8 +14,6 @@ void adminmenu();
 void runLibrarySystem();
 // void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
 //  to modify info (for admin)
-//  >>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
-
 struct Book
 {
     string name;
@@ -40,7 +35,7 @@ struct StudentUser
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BOOKS];
+    int borrowedBooks[MAX_BORROW];
     int borrowedCount = 0; // Number of books borrowed
 } stud;
 void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
@@ -510,7 +505,7 @@ void searchbook()
             cout << "Do you want to search for another book?\n";
             cin >> confirm;
             Invalid();
-            if (userChoice == 'y' || userChoice == 'Y')
+            if (confirm == 'y' || confirm == 'Y')
             {
                 searchbook();
             }
@@ -535,9 +530,13 @@ void searchbook()
 void borrowbook(int &bookcode)
 {
     Book book;
+<<<<<<< HEAD
+    if (stud.borrowedCount >= MAX_BORROW)
+=======
     // rowwww
 
     if (stud.borrowedCount > MAX_BORROW)
+>>>>>>> 7560c8fc855ccc5e5b65f56b4980575b5a519f66
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
@@ -550,48 +549,37 @@ void borrowbook(int &bookcode)
         else
             studentDashboard();
     }
-    ofstream fileborrowed("borrowed.txt");
-    fileborrowed.open("borrwed.txt");
-    fileborrowed << bookname << '\n';
-    fileborrowed.close();
-    book.isAvailable = 0;
-    stud.borrowedCount++;
+    else 
+    {
+        stud.borrowedBooks[stud.borrowedCount]=bookcode-1;
+        stud.borrowedCount++;
+        book.isAvailable=0;
+    }
+   
 }
 void viewMyBorrowedBook()
 {
     Book details; // details should be an array but waiting for Maluka to add books on a loop
-    cout << "\t ---Book Details--- \t\n";
-    cout << "Title : " << details.name << '\n';
-    cout << "Author : " << details.author << '\n';
-    cout << "Catagory : " << details.category << '\n';
-    cout << "Edition : " << details.edition << '\n';
-    cout << "Status [Avaliable/Borrowed]: ";
-    if (details.isAvailable)
-    {
-        cout << "It's avaliable \n\n";
-        cout << "1. Borrow this book \n";
-        cout << "2.Back to list\n";
-        cout << "Enter your choice: ";
-        cin >> userChoice;
-        switch (userChoice)
-        {
-        case 1:
-            borrowbook();
-            break;
-        case 2:
-            studentDashboard();
-            break;
-        default:
-            Invalid();
-            if (confirm == 'y' || confirm == 'Y')
-                viewMyBorrowedBook();
-            else
-                menu();
-        }
+    // int i = stud.borrowedBooks[stud.borrowedCount]-1;
+
+    cout<<"The books you have borrwed : \n";
+    if(stud.borrowedCount==0){
+    cout<<"You have borrowed nothing !! Do you want to borrow a book ? \n";
+    cout<<"Enter y for yes and n to go to the previous page : ";
+    cin>>confirm;
+    Invalid();
+    if(confirm=='y'||confirm=='Y') 
+    borrowbook();
+    else 
+    studentDashboard();
     }
-    else
+    else 
     {
-        cout << "It's Borrowd at certain time\n ";
+        cout<<"The books you have borrowed is \n";
+        for(int i=0;i<stud.borrowedCount;i++)
+        {
+            cout<<i+1<<' '<<books[stud.borrowedBooks[i]].name<<'\n';
+        }
     }
 }
 void returnBook()
