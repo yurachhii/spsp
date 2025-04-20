@@ -530,7 +530,13 @@ void searchbook()
 void borrowbook(int &bookcode)
 {
     Book book;
+<<<<<<< HEAD
     if (stud.borrowedCount >= MAX_BORROW)
+=======
+    // rowwww
+
+    if (stud.borrowedCount > MAX_BORROW)
+>>>>>>> 7560c8fc855ccc5e5b65f56b4980575b5a519f66
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
