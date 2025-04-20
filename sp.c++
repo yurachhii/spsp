@@ -1,15 +1,12 @@
-// >>>>>HEAD
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <string>
 #define MAX_BOOKS 50
-// <<<<<<< HEAD
-#define MAX_BORROW 10
+#define MAX_BORROW 5
 #define MAX_STUEDENT 20
 int userChoice;
 char confirm;
-// =======
 using namespace std;
 // for admin log in function
 bool loginadmin();
@@ -17,8 +14,6 @@ void adminmenu();
 void runLibrarySystem();
 // void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
 //  to modify info (for admin)
-//  >>>>>>> fd36625ec85a0d25f70d90d702ed1f1a4a9a6dee
-
 struct Book
 {
     string name;
@@ -40,11 +35,11 @@ struct StudentUser
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BOOKS];
+    int borrowedBooks[MAX_BORROW];
     int borrowedCount = 0; // Number of books borrowed
 } stud;
-void menu(), login(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
-void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(),searchbook();
+void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
+void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(), searchbook();
 void Invalid() // if the user entered an invalid oprtion
 {
     cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
@@ -56,10 +51,74 @@ void Invalid() // if the user entered an invalid oprtion
         cin >> confirm;
     }
 }
+void LoginStudent(), SignUp(), studentuser();
 int main()
 {
     menu();
     return 0;
+}
+// for student log in & register
+void signUp()
+{
+    string username, password;
+    cout << "Enter a new username: ";
+    cin >> username;
+    cout << "Enter a new password: ";
+    cin >> password;
+
+    // files
+
+    cout << "Account has been successfully created!\n";
+}
+
+void loginStudent()
+{
+    string username, password;
+    cout << "Enter your username: ";
+    cin >> username;
+    cout << "Enter your password: ";
+    cin >> password;
+
+    bool found = false;
+
+    // files
+
+    if (found)
+    {
+        cout << "Login successful! Welcome, " << username << ".\n";
+    }
+    else
+    {
+        cout << "Login failed ! Invalid password or username.\n";
+    }
+}
+
+void studentuser()
+{
+    int choice;
+    do
+    {
+        cout << "1. Sign Up\n";
+        cout << "2. Log In\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            SignUp();
+            break;
+        case 2:
+            LoginStudent();
+            break;
+        case 3:
+            cout << "Exiting ...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+        }
+    } while (choice != 3);
 }
 // for admin log in
 
@@ -150,37 +209,38 @@ void Run()
 }
 void LoadBooksFromFile()
 {
-    ifstream fileBooks("Books.txt");
-    NumberOfBooks = 0;
-    while (NumberOfBooks < MAX_BOOKS)
-    {
-        getline(fileBooks, books[NumberOfBooks].category);
-        getline(fileBooks, books[NumberOfBooks].name);
-        getline(fileBooks, books[NumberOfBooks].author);
-        getline(fileBooks, books[NumberOfBooks].code);
-        fileBooks >> books[NumberOfBooks].isAvailable;
-        fileBooks >> books[NumberOfBooks].edition;
-        NumberOfBooks++;
-        fileBooks.ignore();
-    }
-    fileBooks.close();
+    /*  ifstream fileBooks("Books.txt");
+     NumberOfBooks = 0;
+     while (NumberOfBooks < MAX_BOOKS)
+     {
+         getline(fileBooks, books[NumberOfBooks].category);
+         getline(fileBooks, books[NumberOfBooks].name);
+         getline(fileBooks, books[NumberOfBooks].author);
+         getline(fileBooks, books[NumberOfBooks].code);
+         fileBooks >> books[NumberOfBooks].isAvailable;
+         fileBooks >> books[NumberOfBooks].edition;
+         NumberOfBooks++;
+         fileBooks.ignore();
+     }
+     fileBooks.close();
+     */
 }
 void SaveBooksToFile()
 {
-    // save data to file
-    ofstream fileBooks("Books.txt");
+    /*  // save data to file
+     ofstream fileBooks("Books.txt");
 
-    for (int i = 0; i < NumberOfBooks; i++)
-    {
-        fileBooks << books[i].category << endl;
-        fileBooks << books[i].name << endl;
-        fileBooks << books[i].author << endl;
-        fileBooks << books[i].code << endl;
-        fileBooks << books[i].isAvailable << endl;
-        fileBooks << books[i].edition << endl;
-    }
+     for (int i = 0; i < NumberOfBooks; i++)
+     {
+         fileBooks << books[i].category << endl;
+         fileBooks << books[i].name << endl;
+         fileBooks << books[i].author << endl;
+         fileBooks << books[i].code << endl;
+         fileBooks << books[i].isAvailable << endl;
+         fileBooks << books[i].edition << endl;
+     }
 
-    fileBooks.close();
+     fileBooks.close(); */
 }
 
 void displaymenu()
@@ -206,7 +266,7 @@ void choice(int choice)
 
 int FindBook(string code)
 {
-    int f = -1;
+    /* int f = -1;
     for (int i = 0; i < NumberOfBooks; i++)
     {
 
@@ -227,7 +287,7 @@ int FindBook(string code)
             break;
         }
     }
-    return f;
+    return f; */
 }
 void GetCodeBook()
 {
@@ -306,7 +366,7 @@ void menu()
     switch (userChoice)
     {
     case 1:
-        login();
+        studentuser();
         break;
 
     case 2:
@@ -381,7 +441,7 @@ void viewallbooks()
     cout << "Library books:\n";
     for (int i = 0; i < MAX_BOOKS; i++)
     {
-        cout << books[i].code-1000 << "." << " book:" << books[i].name << endl;
+        cout << books[i].code - 1000 << "." << " book:" << books[i].name << endl;
         if (books[i].isAvailable == 1)
             cout << "Available" << endl;
         else
@@ -413,53 +473,39 @@ void viewallbooks()
 }
 void searchbook()
 {
-    int bookcode=0;
+    int bookcode = 0;
     cout << "write the code of the book you are looking for: \n";
-    cin>>bookcode;
-    bookcode+=1000;
-    bool book_is_here=0,book_availability;
-    for(int i=0;i<MAX_BOOKS;i++)
+    cin >> bookcode;
+    bookcode += 1000;
+    bool book_is_here = 0, book_availability;
+    for (int i = 0; i < MAX_BOOKS; i++)
     {
-        if(bookcode==books[i].code)
+        if (bookcode == books[i].code)
         {
-            book_is_here=1;
-            book_availability=books[i].isAvailable;
+            book_is_here = 1;
+            book_availability = books[i].isAvailable;
             break;
         }
     }
-    if(book_is_here)
+    if (book_is_here)
     {
-            if (book_availability)
+        if (book_availability)
+        {
+            cout << "the book is available.\n";
+            cout << "Do you want to borrow this book?\n";
+            cin >> userChoice;
+            if (confirm == 'y' || confirm == 'Y')
             {
-                cout << "the book is available.\n";
-                cout << "Do you want to borrow this book?\n";
-                cin >> userChoice;
-                if (confirm == 'y' || confirm == 'Y')
-                {
-                    borrowbook(bookcode);
-                }
+                borrowbook(bookcode);
             }
-            else
-            {
-                cout << "the book is not available.\n";
-                cout << "Do you want to search for another book?\n";
-                cin >> confirm;
-                Invalid();
-                if (userChoice == 'y' || userChoice == 'Y')
-                {
-                    searchbook();
-                }
-                else
-                    studentDashboard();
-            }
-         }
-    
+        }
         else
         {
-            cout << "You have entered unvalid book Do you want to search another book ? \n";
+            cout << "the book is not available.\n";
+            cout << "Do you want to search for another book?\n";
             cin >> confirm;
             Invalid();
-            if (userChoice == 'y' || userChoice == 'Y')
+            if (confirm == 'y' || confirm == 'Y')
             {
                 searchbook();
             }
@@ -467,13 +513,24 @@ void searchbook()
                 studentDashboard();
         }
     }
+
+    else
+    {
+        cout << "You have entered unvalid book Do you want to search another book ? \n";
+        cin >> confirm;
+        Invalid();
+        if (userChoice == 'y' || userChoice == 'Y')
+        {
+            searchbook();
+        }
+        else
+            studentDashboard();
+    }
+}
 void borrowbook(int &bookcode)
 {
     Book book;
-    StudentUser stud;
-    //rowwww
-
-    if (stud.borrowedCount > MAX_BORROW)
+    if (stud.borrowedCount >= MAX_BORROW)
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
@@ -486,52 +543,40 @@ void borrowbook(int &bookcode)
         else
             studentDashboard();
     }
-   for(int i=0;i<MAX_BOOKS;i++)
-   {
-    if(bookcode==books[i].code)
+    else 
     {
-        cout<<books[i].name;
+        stud.borrowedBooks[stud.borrowedCount]=bookcode-1;
+        stud.borrowedCount++;
+        book.isAvailable=0;
     }
-   }
+   
 }
 void viewMyBorrowedBook()
 {
     Book details; // details should be an array but waiting for Maluka to add books on a loop
-    cout << "\t ---Book Details--- \t\n";
-    cout << "Title : " << details.name << '\n';
-    cout << "Author : " << details.author << '\n';
-    cout << "Catagory : " << details.category << '\n';
-    cout << "Edition : " << details.edition << '\n';
-    cout << "Status [Avaliable/Borrowed]: ";
-    if (details.isAvailable)
-    {
-        cout << "It's avaliable \n\n";
-        cout << "1. Borrow this book \n";
-        cout << "2.Back to list\n";
-        cout << "Enter your choice: ";
-        cin >> userChoice;
-        switch (userChoice)
-        {
-        case 1:
-            borrowbook();
-            break;
-        case 2:
-            studentDashboard();
-            break;
-        default:
-            Invalid();
-            if (confirm == 'y' || confirm == 'Y')
-                viewMyBorrowedBook();
-            else
-                menu();
-        }
+    // int i = stud.borrowedBooks[stud.borrowedCount]-1;
+
+    cout<<"The books you have borrwed : \n";
+    if(stud.borrowedCount==0){
+    cout<<"You have borrowed nothing !! Do you want to borrow a book ? \n";
+    cout<<"Enter y for yes and n to go to the previous page : ";
+    cin>>confirm;
+    Invalid();
+    if(confirm=='y'||confirm=='Y') 
+    borrowbook();
+    else 
+    studentDashboard();
     }
-    else
+    else 
     {
-        cout << "It's Borrowd at certain time\n ";
+        cout<<"The books you have borrowed is \n";
+        for(int i=0;i<stud.borrowedCount;i++)
+        {
+            cout<<i+1<<' '<<books[stud.borrowedBooks[i]].name<<'\n';
+        }
     }
 }
 void returnBook()
 {
 }
-//manar
+// manar
