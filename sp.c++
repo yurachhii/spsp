@@ -5,6 +5,7 @@
 #define MAX_BOOKS 50
 #define MAX_BORROW 5
 #define MAX_STUEDENT 20
+#define ll long long
 int userChoice;
 char confirm;
 using namespace std;
@@ -26,7 +27,7 @@ struct Book
 Book books[MAX_BOOKS];
 int NumberOfBooks = 0;
 void ModifyBook(Book &book), LoadBooksFromFile(), SaveBooksToFile(), displaymenu();
-int FindBook(string codebook);
+int FindBook(string codebook),indexStudent=-1;
 void GetCodeBook(), choice(int);
 void Run();
 string codebook;
@@ -35,9 +36,9 @@ struct StudentUser
     int id;
     string name;
     string password;
-    int borrowedBooks[MAX_BORROW];
+    int borrowedBooks[MAX_BORROW]{};
     int borrowedCount = 0; // Number of books borrowed
-} stud;
+} stud[MAX_STUEDENT];
 void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
 void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(), searchbook();
 void Invalid() // if the user entered an invalid oprtion
@@ -52,40 +53,90 @@ void Invalid() // if the user entered an invalid oprtion
     }
 }
 void LoginStudent(), SignUp(), studentuser();
+int searchForID(ll userID);
+bool searchForPassword(string pass);
+int studentCount = 0;
 int main()
 {
     menu();
     return 0;
 }
 // for student log in & register
+void LoadStudentFromFile(){
+    ifstream fileStudents("student.txt");
+    fileStudents>>studentCount;
+    for(int NumberOfStudents=0;NumberOfStudents<studentCount;NumberOfStudents++){
+        fileStudents >> stud[NumberOfStudents].id;
+        getline(fileStudents, stud[NumberOfStudents].name);
+        getline(fileStudents, stud[NumberOfStudents].password);
+        fileStudents >> stud[NumberOfStudents].borrowedCount;
+        for(int i=0;i<stud[NumberOfBooks].borrowedCount;i++){
+            fileStudents >> stud[NumberOfStudents].borrowedBooks[i];
+        }
+        fileStudents.ignore();
+    }
+    fileStudents.close();
+}
+int searchForID(ll userID){
+    for(int i=0;i<studentCount;i++){
+        if(stud[i].id==userID){
+            return i;
+        }
+    }
+    return -1;
+}
+bool searchForPassword(string pass,int index){
+    if(pass.size()==stud[index].password.size()){
+        for(int i=0;i<pass.size();i++){
+            if(pass[i]!=stud[index].password[i]) return 0;
+        }
+        return 1;
+    }else{
+        return 0;
+    }
+}
+void SaveDataStudent(){
+    ofstream fileStudents("student.txt");
+    fileStudents<<studentCount;
+    for (int i = 0; i < studentCount; i++) {
+        fileStudents << stud[i].id << endl;  
+        fileStudents<< stud[i].name << endl;      
+        fileStudents << stud[i].password << endl;
+        fileStudents << stud[i].borrowedCount<<endl;
+        for(int j=0;j<stud[i].borrowedCount;j++){
+            fileStudents << stud[i].borrowedBooks[j]<<endl;
+        }
+    }
+    fileStudents.close();  
+    
+}
 void signUp()
 {
-    string username, password;
+    string password;
+    ll userID;
     cout << "Enter a new username: ";
-    cin >> username;
+    cin >> userID;
     cout << "Enter a new password: ";
     cin >> password;
 
-    // files
-
-    cout << "Account has been successfully created!\n";
+    indexStudent= searchForID(userID);
+    if(indexStudent!=-1){
+        cout << "Account has been successfully created!\n";
+    }
 }
 
 void loginStudent()
 {
-    string username, password;
-    cout << "Enter your username: ";
-    cin >> username;
-    cout << "Enter your password: ";
+    string password;
+    ll userID;
+    cout << "Enter a new id: ";
+    cin >> userID;
+    cout << "Enter a new password: ";
     cin >> password;
 
-    bool found = false;
-
-    // files
-
-    if (found)
-    {
-        cout << "Login successful! Welcome, " << username << ".\n";
+    indexStudent= searchForID(userID);
+    if(indexStudent>=0&& searchForPassword(password,indexStudent)){
+        cout << "Login successful! Welcome, " << stud[indexStudent].name << ".\n";
     }
     else
     {
@@ -209,38 +260,37 @@ void Run()
 }
 void LoadBooksFromFile()
 {
-    /*  ifstream fileBooks("Books.txt");
-     NumberOfBooks = 0;
-     while (NumberOfBooks < MAX_BOOKS)
-     {
-         getline(fileBooks, books[NumberOfBooks].category);
-         getline(fileBooks, books[NumberOfBooks].name);
-         getline(fileBooks, books[NumberOfBooks].author);
-         getline(fileBooks, books[NumberOfBooks].code);
-         fileBooks >> books[NumberOfBooks].isAvailable;
-         fileBooks >> books[NumberOfBooks].edition;
-         NumberOfBooks++;
-         fileBooks.ignore();
-     }
-     fileBooks.close();
-     */
+    ifstream fileBooks("Books.txt");
+    NumberOfBooks = 0;
+        while (NumberOfBooks < MAX_BOOKS)
+        {
+            getline(fileBooks, books[NumberOfBooks].category);
+            getline(fileBooks, books[NumberOfBooks].name);
+            getline(fileBooks, books[NumberOfBooks].author);
+            fileBooks >> books[NumberOfBooks].code;
+            fileBooks >> books[NumberOfBooks].isAvailable;
+            fileBooks >> books[NumberOfBooks].edition;
+            NumberOfBooks++;
+            fileBooks.ignore();
+        }
+        fileBooks.close();
 }
 void SaveBooksToFile()
 {
-    /*  // save data to file
-     ofstream fileBooks("Books.txt");
+     // save data to file
+        ofstream fileBooks("Books.txt");
 
-     for (int i = 0; i < NumberOfBooks; i++)
-     {
-         fileBooks << books[i].category << endl;
-         fileBooks << books[i].name << endl;
-         fileBooks << books[i].author << endl;
-         fileBooks << books[i].code << endl;
-         fileBooks << books[i].isAvailable << endl;
-         fileBooks << books[i].edition << endl;
-     }
+        for (int i = 0; i < NumberOfBooks; i++)
+        {
+            fileBooks << books[i].category << endl;
+            fileBooks << books[i].name << endl;
+            fileBooks << books[i].author << endl;
+            fileBooks << books[i].code << endl;
+            fileBooks << books[i].isAvailable << endl;
+            fileBooks << books[i].edition << endl;
+        }
 
-     fileBooks.close(); */
+        fileBooks.close(); 
 }
 
 void displaymenu()
@@ -355,7 +405,7 @@ void ModifyBook(Book &book)
 void menu()
 { // home page that appears in the first program
     cout << right << setw(50) << "Welcome to University Library System\n"
-         << " ";
+        << " ";
     cout << right << setw(50) << setfill('-') << " " << '\n';
     cout << "1. Student log in \n";
     cout << "2. Admin log in \n";
@@ -476,16 +526,11 @@ void searchbook()
     int bookcode = 0;
     cout << "write the code of the book you are looking for: \n";
     cin >> bookcode;
-    bookcode += 1000;
+    bookcode --;
     bool book_is_here = 0, book_availability;
-    for (int i = 0; i < MAX_BOOKS; i++)
-    {
-        if (bookcode == books[i].code)
-        {
-            book_is_here = 1;
-            book_availability = books[i].isAvailable;
-            break;
-        }
+    if(bookcode>=0&&bookcode<MAX_BOOKS){
+        book_is_here=1;
+        book_availability=books[bookcode].isAvailable;
     }
     if (book_is_here)
     {
@@ -530,13 +575,7 @@ void searchbook()
 void borrowbook(int &bookcode)
 {
     Book book;
-<<<<<<< HEAD
     if (stud.borrowedCount >= MAX_BORROW)
-=======
-    // rowwww
-
-    if (stud.borrowedCount > MAX_BORROW)
->>>>>>> 7560c8fc855ccc5e5b65f56b4980575b5a519f66
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
@@ -555,7 +594,6 @@ void borrowbook(int &bookcode)
         stud.borrowedCount++;
         book.isAvailable=0;
     }
-   
 }
 void viewMyBorrowedBook()
 {
