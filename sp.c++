@@ -263,10 +263,10 @@ void adminmenu()
         // menubooks();
         break;
     case 2:
-        // addbooks();
+        addbooks();
         break;
     case 3:
-        // deletebooks();
+        deletebooks();
         break;
     case 4:
         Run();
@@ -280,6 +280,76 @@ void adminmenu()
 }
 
 // the second task for admin modify
+
+
+
+void addbooks()
+{
+	if(NumberOfBooks==MAX_BOOKS)
+	{
+		cout<<"Can't add more books. Maximum capacity reached.\n";
+		return ;
+	}
+	
+    Book New_Book;
+
+	cout<<"Enter book category: ";
+	getline(cin,New_Book.category);
+    
+    cout<<"Enter book name: ";
+    getline(cin,New_Book.name);
+    
+    cout<<"Enter author name: ";
+    getline(cin,New_Book.author);
+    
+    cout<<"Enter book code: ";
+    cin>>New_Book.code;
+    
+    cout<<"Is the book available? (1 = Yes / 0 = No): ";
+    cin>>New_Book.isAvailable;
+    
+    cout<<"Enter edition number: ";
+    cin>>New_Book.edition;
+    
+    // Add the book to the array
+    books[NumberOfBooks] = New_Book;
+    NumberOfBooks++;
+    
+    cout<<"Book added successfully!\n";
+    
+    SaveBooksToFile();
+}
+
+void deletebooks()
+{
+
+	int bookcode;
+	cin>>bookcode;
+	bool book_valid=0;
+	for(int i=0;i<NumberOfBooks;i++)
+	{
+		if(books[i].code==bookcode)
+		{
+			book_valid=1;
+			for(int j=i;j<NumberOfBooks-1;j++)
+			{
+				books[j]=books[j+1];
+			}
+			NumberOfBooks--;
+			cout<<"Book deleted successfully!\n";
+			break;
+		}
+		if(!book_valid)
+		{
+			cout<<" Book with the given code not found.\n";
+		}
+	}
+
+	SaveBooksToFile();
+}
+
+
+
 
 void Run()
 {
