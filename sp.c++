@@ -8,6 +8,8 @@
 #define ll long long
 int userChoice;
 char confirm;
+int bookcode = 0;
+
 using namespace std;
 // for admin log in function
 bool loginadmin();
@@ -26,7 +28,7 @@ struct Book
 };
 Book books[MAX_BOOKS];
 int NumberOfBooks = 0;
-void ModifyBook(Book &book), LoadBooksFromFile(), SaveBooksToFile(), displaymenu();
+void ModifyBook(Book &book), LoadBooksFromFile(),SaveDataStudent(), SaveBooksToFile(), displaymenu();
 int FindBook(string codebook),indexStudent=-1;
 void GetCodeBook(), choice(int);
 void Run();
@@ -515,7 +517,7 @@ void viewallbooks()
 }
 void searchbook()
 {
-    int bookcode = 0;
+    //  bookcode = 0;
     cout << "write the code of the book you are looking for: \n";
     cin >> bookcode;
     bookcode --;
@@ -545,7 +547,7 @@ void searchbook()
             cin >> userChoice;
             if (confirm == 'y' || confirm == 'Y')
             {
-                borrowbook(bookcode);
+                borrowbook();
             }
         }
         else
@@ -564,7 +566,7 @@ void searchbook()
 
 
 }
-void borrowbook(int &bookcode)
+void borrowbook()
 {
     Book book;
     if (student.borrowedCount >= MAX_BORROW)
