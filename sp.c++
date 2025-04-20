@@ -26,7 +26,7 @@ struct Book
 };
 Book books[MAX_BOOKS];
 int NumberOfBooks = 0;
-void ModifyBook(Book &book), LoadBooksFromFile(), SaveBooksToFile(), displaymenu();
+void ModifyBook(Book &book), LoadBooksFromFile(),SaveDataStudent(), SaveBooksToFile(), displaymenu();
 int FindBook(string codebook),indexStudent=-1;
 void GetCodeBook(), choice(int);
 void Run();
@@ -676,7 +676,7 @@ void returnBook()
         studentDashboard();
     }
  SaveBooksToFile();
- saveDataStudent();
+ SaveDataStudent();
     // SaveBooksToFile();
     // SaveDataStudent();
     // studentDashboard();
