@@ -38,7 +38,7 @@ struct StudentUser
     string password;
     int borrowedBooks[MAX_BORROW]{};
     int borrowedCount = 0; // Number of books borrowed
-} stud[MAX_STUEDENT];
+} stud[MAX_STUEDENT],student;
 void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook(), changePass();
 void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(), searchbook();
 void Invalid() // if the user entered an invalid oprtion
@@ -575,7 +575,7 @@ void searchbook()
 void borrowbook(int &bookcode)
 {
     Book book;
-    if (stud.borrowedCount >= MAX_BORROW)
+    if (student.borrowedCount >= MAX_BORROW)
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
@@ -590,8 +590,8 @@ void borrowbook(int &bookcode)
     }
     else 
     {
-        stud.borrowedBooks[stud.borrowedCount]=bookcode-1;
-        stud.borrowedCount++;
+        student.borrowedBooks[student.borrowedCount]=bookcode-1;
+        student.borrowedCount++;
         book.isAvailable=0;
     }
 }
@@ -601,7 +601,7 @@ void viewMyBorrowedBook()
     // int i = stud.borrowedBooks[stud.borrowedCount]-1;
 
     cout<<"The books you have borrwed : \n";
-    if(stud.borrowedCount==0){
+    if(student.borrowedCount==0){
     cout<<"You have borrowed nothing !! Do you want to borrow a book ? \n";
     cout<<"Enter y for yes and n to go to the previous page : ";
     cin>>confirm;
@@ -614,9 +614,9 @@ void viewMyBorrowedBook()
     else 
     {
         cout<<"The books you have borrowed is \n";
-        for(int i=0;i<stud.borrowedCount;i++)
+        for(int i=0;i<student.borrowedCount;i++)
         {
-            cout<<i+1<<' '<<books[stud.borrowedBooks[i]].name<<'\n';
+            cout<<i+1<<' '<<books[student.borrowedBooks[i]].name<<'\n';
         }
     }
 }
