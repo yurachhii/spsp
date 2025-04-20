@@ -43,7 +43,6 @@ void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), I
 void menu(), login(), registeration(), studentDashboard(), Invalid(), returnBook(), viewMyBorrowedBook(), borrowbook(), changePass(), searchbook();
 void Invalid() // if the user entered an invalid oprtion
 {
-    cout << "Invalid Option , Do you want to return to the home page? (y for yes) or (n for no) : ";
     cin >> confirm;
     while ((confirm != 'y' && confirm != 'Y') && (confirm != 'n' && confirm != 'N'))
     {
@@ -484,7 +483,7 @@ void viewallbooks()
     cout << "Library books:\n";
     for (int i = 0; i < MAX_BOOKS; i++)
     {
-        cout << books[i].code - 1000 << "." << " book:" << books[i].name << endl;
+        cout << books[i].code << "." << " book:" << books[i].name << endl;
         if (books[i].isAvailable == 1)
             cout << "Available" << endl;
         else
@@ -521,9 +520,21 @@ void searchbook()
     cin >> bookcode;
     bookcode --;
     bool book_is_here = 0, book_availability;
-    if(bookcode>=0&&bookcode<MAX_BOOKS){
+    if(bookcode>=0 && bookcode<MAX_BOOKS){
         book_is_here=1;
         book_availability=books[bookcode].isAvailable;
+    }
+    else
+    {
+        cout << "You have entered unvalid book Do you want to search another book ? \n";
+        cin >> confirm;
+        Invalid();
+        if (userChoice == 'y' || userChoice == 'Y')
+        {
+            searchbook();
+        }
+        else
+            studentDashboard();
     }
     if (book_is_here)
     {
@@ -541,7 +552,6 @@ void searchbook()
         {
             cout << "the book is not available.\n";
             cout << "Do you want to search for another book?\n";
-            cin >> confirm;
             Invalid();
             if (confirm == 'y' || confirm == 'Y')
             {
@@ -552,18 +562,7 @@ void searchbook()
         }
     }
 
-    else
-    {
-        cout << "You have entered unvalid book Do you want to search another book ? \n";
-        cin >> confirm;
-        Invalid();
-        if (userChoice == 'y' || userChoice == 'Y')
-        {
-            searchbook();
-        }
-        else
-            studentDashboard();
-    }
+
 }
 void borrowbook(int &bookcode)
 {
@@ -572,7 +571,6 @@ void borrowbook(int &bookcode)
     {
         cout << "You have reached the limited borrowing .. if you want to borrow extra books you have to return book \n";
         cout << "Do you want to return book? :";
-        cin >> confirm;
         Invalid();
         if (confirm == 'y' || confirm == 'Y')
         {
@@ -583,21 +581,18 @@ void borrowbook(int &bookcode)
     }
     else 
     {
-        student.borrowedBooks[student.borrowedCount]=bookcode-1;
-        student.borrowedCount++;
-        book.isAvailable=0;
+        stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]=bookcode;
+        // student.borrowedBooks[student.borrowedCount]=bookcode;
+        stud[indexStudent].borrowedCount++;
+        books[bookcode].isAvailable=0;
     }
 }
 void viewMyBorrowedBook()
 {
-    Book details; // details should be an array but waiting for Maluka to add books on a loop
-    // int i = stud.borrowedBooks[stud.borrowedCount]-1;
-
     cout<<"The books you have borrwed : \n";
-    if(student.borrowedCount==0){
+    if(stud[indexStudent].borrowedCount==0){
     cout<<"You have borrowed nothing !! Do you want to borrow a book ? \n";
     cout<<"Enter y for yes and n to go to the previous page : ";
-    cin>>confirm;
     Invalid();
     if(confirm=='y'||confirm=='Y') 
     borrowbook();
@@ -607,10 +602,16 @@ void viewMyBorrowedBook()
     else 
     {
         cout<<"The books you have borrowed is \n";
-        for(int i=0;i<student.borrowedCount;i++)
+        for(int i=0;i<stud[indexStudent].borrowedCount;i++)
         {
-            cout<<i+1<<' '<<books[student.borrowedBooks[i]].name<<'\n';
+            cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]].name<<'\n';
         }
+        cout<<"Do you want to retrun a book ? \n";
+        Invalid();
+        if(confirm=='y'||confirm=='Y') 
+        returnBook();
+        else 
+        studentDashboard();
     }
 }
 void returnBook()
