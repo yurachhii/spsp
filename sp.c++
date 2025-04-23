@@ -420,31 +420,31 @@ void choice(int choice)
     }
 }
 
-int FindBook(string code)
-{
-    /* int f = -1;
-    for (int i = 0; i < NumberOfBooks; i++)
-    {
+// int FindBook(string code)
+// {
+//     /* int f = -1;
+//     for (int i = 0; i < NumberOfBooks; i++)
+//     {
 
-        for (int j = 0; j < 4; j++)
-        {
-            if (books[i].code[j] == codebook[j])
-            { // search if book exist or not
-                f = i;
-            }
-            else
-            {
-                f = -1;
-                break;
-            }
-        }
-        if (f >= 0)
-        {
-            break;
-        }
-    }
-    return f; */
-}
+//         for (int j = 0; j < 4; j++)
+//         {
+//             if (books[i].code[j] == codebook[j])
+//             { // search if book exist or not
+//                 f = i;
+//             }
+//             else
+//             {
+//                 f = -1;
+//                 break;
+//             }
+//         }
+//         if (f >= 0)
+//         {
+//             break;
+//         }
+//     }
+//     return f; */
+// }
 void GetCodeBook()
 {
     cout << "Enter The Code Of The Book Which You Want To Modify Information About It : ";
