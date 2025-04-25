@@ -403,7 +403,7 @@ void login()
 }*/
 void studentDashboard() // Student Dashboard
 {
-    StudentUser stud;
+   // StudentUser stud;
     cout << right << setw(50) << "Welcome!! " << stud.name << '\n';
     cout << "1. View all books \n";
     cout << "2. Search for a certain book \n";
@@ -552,7 +552,7 @@ void borrowbook(int &bookcode)
     }
     ofstream fileborrowed("borrowed.txt");
     fileborrowed.open("borrwed.txt");
-    fileborrowed << bookname << '\n';
+    fileborrowed << book.name << '\n'; //updated
     fileborrowed.close();
     book.isAvailable = 0;
     stud.borrowedCount++;
