@@ -8,14 +8,14 @@
 #define ll long long
 int userChoice;
 char confirm;
-int bookcode = 0;
+int bookcode = 0 ; // for user
 
 using namespace std;
 // for admin log in function
 bool loginadmin();
 void adminmenu();
 void runLibrarySystem();
-// void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
+void menubooks(), addbooks(), deletebooks(), modifyinfo(), orderbook();
 //  to modify info (for admin)
 struct Book
 {
@@ -450,29 +450,26 @@ void studentDashboard() // Student Dashboard
     cout << right << setw(50) << "Welcome!! " << stud.name << '\n';
     cout << "1. View all books \n";
     cout << "2. Search for a certain book \n";
-    cout << "3. Edit my profile \n";
-    cout << "4. View my borrowed books \n";
-    cout << "5.Return my book \n";
-    cout << "6. Changed password \n";
-    cout << "7. Log out \n";
+    cout << "3. View my borrowed books \n";
+    cout << "4.Return my book \n";
+    cout << "5. Changed password \n";
+    cout << "6. Log out \n";
     cout << "Enter your choice from (1 => 6) : ";
     cin >> userChoice;
     switch (userChoice)
     {
-    case 1:;
+    case 1: viewallbooks();
         break;
-    case 2:
+    case 2 : searchbook();
         break;
-    case 3:;
-        break;
-    case 4:
+    case 3:
         viewMyBorrowedBook();
         break;
-    case 5:;
+    case 4: returnBook();
         break;
-    case 6:;
+    case 5: changePass;
         break;
-    case 7:
+    case 6:
         menu();
         break;
     default:
