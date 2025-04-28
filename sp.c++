@@ -8,8 +8,7 @@
 #define ll long long
 int userChoice;
 char confirm;
-int bookcode = 0 ; // for user
-
+int bookcode  , findBook(int code); // for user
 using namespace std;
 // for admin log in function
 bool loginadmin();
@@ -28,11 +27,10 @@ struct Book
 };
 Book books[MAX_BOOKS];
 int NumberOfBooks = 0;
-void ModifyBook(Book &book), LoadBooksFromFile(),SaveDataStudent(), SaveBooksToFile(), displaymenu();
-int FindBook(string codebook),indexStudent=-1;
-void GetCodeBook(), choice(int);
+void ModifyBook(Book &book), LoadBooksFromFile(),SaveDataStudent(), SaveBooksToFile(), searchbookforUser(), displaymenu();
+int indexStudent=-1, codebook;
+void GetCodeBook(),choice(int);
 void Run();
-string codebook;
 struct StudentUser
 {
     int id;
@@ -41,9 +39,9 @@ struct StudentUser
     int borrowedBooks[MAX_BORROW]{};
     int borrowedCount = 0; // Number of books borrowed
 } stud[MAX_STUEDENT],student;
-void menu(), registeration(), adminmenu(), viewallbooks(), studentDashboard(), returnBook(), viewMyBook(), borrowbook();
-void login(), viewMyBorrowedBook(),  changePass(), searchbook();
-void Invalid()//function to display invalid message
+void menu(), registeration(), adminmenu(),LoadStudentFromFile(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook();
+void login(), viewMyBorrowedBook(),  changePass();
+void Invalid() // if the user entered an invalid oprtion
 {
     cin >> confirm;
     while ((confirm != 'y' && confirm != 'Y') && (confirm != 'n' && confirm != 'N'))
@@ -55,16 +53,24 @@ void Invalid()//function to display invalid message
 }
 void LoginStudent(), SignUp(), studentuser();
 int searchForID(ll userID);
-bool searchForPassword(string pass);
+bool searchForPassword(string pass,int index);
 int studentCount = 0;
 int main()
 {
-    LoadStudentFromFile();
     LoadBooksFromFile();
+    LoadStudentFromFile();
     menu();
     SaveBooksToFile();
     SaveDataStudent();
     return 0;
+}
+int findBook(int code){
+    for(int i=0;i<NumberOfBooks;i++){
+        if(books[i].code==code){
+            return i;
+        }
+    }
+    return -1;
 }
 void menu()
 { // home page that appears in the first program
@@ -82,7 +88,6 @@ void menu()
     case 1:
         studentuser();
         break;
-
     case 2:
         runLibrarySystem();
         break;
@@ -110,7 +115,7 @@ void LoadStudentFromFile(){
         getline(fileStudents, stud[NumberOfStudents].name);
         getline(fileStudents, stud[NumberOfStudents].password);
         fileStudents >> stud[NumberOfStudents].borrowedCount;
-        for(int i=0;i<stud[NumberOfBooks].borrowedCount;i++){
+        for(int i=0;i<stud[NumberOfStudents].borrowedCount;i++){
             fileStudents >> stud[NumberOfStudents].borrowedBooks[i];
         }
         fileStudents.ignore();
@@ -165,7 +170,7 @@ void SignUp()
     }
 }
 
-void LoginStudent()
+void loginStudent()
 {
     string password;
     ll userID;
@@ -173,7 +178,6 @@ void LoginStudent()
     cin >> userID;
     cout << "Enter a new password: ";
     cin >> password;
-
     indexStudent= searchForID(userID);
     if(indexStudent>=0&& searchForPassword(password,indexStudent)){
         cout << "Login successful! Welcome, " << stud[indexStudent].name << ".\n";
@@ -183,7 +187,6 @@ void LoginStudent()
         cout << "Login failed ! Invalid password or username.\n";
     }
 }
-
 void studentuser()
 {
     int choice;
@@ -194,7 +197,6 @@ void studentuser()
         cout << "3. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
-
         switch (choice)
         {
         case 1:
@@ -267,10 +269,10 @@ void adminmenu()
         // menubooks();
         break;
     case 2:
-        // addbooks();
+        addbooks();
         break;
     case 3:
-        // deletebooks();
+        deletebooks();
         break;
     case 4:
         Run();
@@ -282,75 +284,76 @@ void adminmenu()
         cout << "Invalid choice!\n";
     }
 }
-
 // the second task for admin modify
 void addbooks()
 {
-    if (NumberOfBooks == MAX_BOOKS)
-    {
-        cout << "Can't add more books. Maximum capacity reached.\n";
-        return;
-    }
-
+	if(NumberOfBooks==MAX_BOOKS)
+	{
+		cout<<"Can't add more books. Maximum capacity reached.\n";
+		return ;
+	}
+	
     Book New_Book;
 
-    cout << "Enter book category: ";
-    getline(cin, New_Book.category);
-
-    cout << "Enter book name: ";
-    getline(cin, New_Book.name);
-
-    cout << "Enter author name: ";
-    getline(cin, New_Book.author);
-
-    cout << "Enter book code: ";
-    cin >> New_Book.code;
-
-    cout << "Is the book available? (1 = Yes / 0 = No): ";
-    cin >> New_Book.isAvailable;
-
-    cout << "Enter edition number: ";
-    cin >> New_Book.edition;
-
+	cout<<"Enter book category: ";
+	getline(cin,New_Book.category);
+    
+    cout<<"Enter book name: ";
+    getline(cin,New_Book.name);
+    
+    cout<<"Enter author name: ";
+    getline(cin,New_Book.author);
+    
+    cout<<"Enter book code: ";
+    cin>>New_Book.code;
+    
+    cout<<"Is the book available? (1 = Yes / 0 = No): ";
+    cin>>New_Book.isAvailable;
+    
+    cout<<"Enter edition number: ";
+    cin>>New_Book.edition;
+    
     // Add the book to the array
     books[NumberOfBooks] = New_Book;
     NumberOfBooks++;
-
-    cout << "Book added successfully!\n";
-
-    SaveBooksToFile();
+    
+    cout<<"Book added successfully!\n";
+    
+    
 }
+
 void deletebooks()
 {
+	int bookcode;
+	cin>>bookcode;
+	bool book_valid=0;
+	for(int i=0;i<NumberOfBooks;i++)
+	{
+		if(books[i].code==bookcode)
+		{
+			book_valid=1;
+			for(int j=i;j<NumberOfBooks-1;j++)
+			{
+				books[j]=books[j+1];
+			}
+			NumberOfBooks--;
+			cout<<"Book deleted successfully!\n";
+			break;
+		}
+		if(!book_valid)
+		{
+			cout<<" Book with the given code not found.\n";
+		}
+	}
 
-    int bookcode;
-    cin >> bookcode;
-    bool book_valid = 0;
-    for (int i = 0;i < NumberOfBooks;i++)
-    {
-        if (books[i].code == bookcode)
-        {
-            book_valid = 1;
-            for (int j = i;j < NumberOfBooks - 1;j++)
-            {
-                books[j] = books[j + 1];
-            }
-            NumberOfBooks--;
-            cout << "Book deleted successfully!\n";
-            break;
-        }
-        if (!book_valid)
-        {
-            cout << " Book with the given code not found.\n";
-        }
-    }
-
-    SaveBooksToFile();
+	
 }
+
+
+
 
 void Run()
 {
-    LoadBooksFromFile();
     int userchoice;
     do
     {
@@ -359,21 +362,20 @@ void Run()
         cin >> userchoice;
         choice(userchoice);
     } while (userchoice != 2);
-    SaveBooksToFile();
+    
 }
 void LoadBooksFromFile()
 {
     ifstream fileBooks("Books.txt");
-    NumberOfBooks = 0;
-        while (NumberOfBooks < MAX_BOOKS)
+    fileBooks >> NumberOfBooks;
+        for(int i=0;i<NumberOfBooks;i++)
         {
-            getline(fileBooks, books[NumberOfBooks].category);
-            getline(fileBooks, books[NumberOfBooks].name);
-            getline(fileBooks, books[NumberOfBooks].author);
-            fileBooks >> books[NumberOfBooks].code;
-            fileBooks >> books[NumberOfBooks].isAvailable;
-            fileBooks >> books[NumberOfBooks].edition;
-            NumberOfBooks++;
+            getline(fileBooks, books[i].category);
+            getline(fileBooks, books[i].name);
+            getline(fileBooks, books[i].author);
+            fileBooks >> books[i].code;
+            fileBooks >> books[i].isAvailable;
+            fileBooks >> books[i].edition;
             fileBooks.ignore();
         }
         fileBooks.close();
@@ -382,7 +384,7 @@ void SaveBooksToFile()
 {
      // save data to file
         ofstream fileBooks("Books.txt");
-
+        fileBooks << NumberOfBooks;
         for (int i = 0; i < NumberOfBooks; i++)
         {
             fileBooks << books[i].category << endl;
@@ -417,36 +419,12 @@ void choice(int choice)
     }
 }
 
-int FindBook(string code)
-{
-    /* int f = -1;
-    for (int i = 0; i < NumberOfBooks; i++)
-    {
 
-        for (int j = 0; j < 4; j++)
-        {
-            if (books[i].code[j] == codebook[j])
-            { // search if book exist or not
-                f = i;
-            }
-            else
-            {
-                f = -1;
-                break;
-            }
-        }
-        if (f >= 0)
-        {
-            break;
-        }
-    }
-    return f; */
-}
 void GetCodeBook()
 {
     cout << "Enter The Code Of The Book Which You Want To Modify Information About It : ";
     cin >> codebook;
-    int index = FindBook(codebook);
+    int index = findBook(codebook);
     if (index == -1)
     {
         cout << "Book not found.\n";
@@ -523,7 +501,7 @@ void studentDashboard() // Student Dashboard
     {
     case 1: viewallbooks();
         break;
-    case 2 : searchbook();
+    case 2 : searchbookforUser();
         break;
     case 3:
         viewMyBorrowedBook();
@@ -547,9 +525,9 @@ void studentDashboard() // Student Dashboard
 void viewallbooks()
 {
     cout << "Library books:\n";
-    for (int i = 0; i < MAX_BOOKS; i++)
+    for (int i = 0; i < NumberOfBooks; i++)
     {
-        cout << books[i].code << "." << " book:" << books[i].name << endl;
+        cout << i+1<<"."<<books[i].code << "-" << " book:" << books[i].name << endl;
         if (books[i].isAvailable == 1)
             cout << "Available" << endl;
         else
@@ -581,37 +559,48 @@ void viewallbooks()
 }
 void searchbook()
 {
-    //  bookcode = 0;
     cout << "write the code of the book you are looking for: \n";
     cin >> bookcode;
-    bookcode --;
     bool book_is_here = 0, book_availability;
-    if(bookcode>=0 && bookcode<MAX_BOOKS){
-        book_is_here=1;
-        book_availability=books[bookcode].isAvailable;
+    for(int i=0 ; i < NumberOfBooks ; i++)
+    {
+        if (bookcode ==books[i].code)
+        {
+            book_is_here = 1;
+            book_availability = books[i].isAvailable;
+        }
     }
-    else
+    
+    if(book_is_here==0)
     {
         cout << "You have entered unvalid book Do you want to search another book ? \n";
-        cin >> confirm;
         Invalid();
-        if (userChoice == 'y' || userChoice == 'Y')
+        if (confirm == 'y' || confirm == 'Y')
         {
             searchbook();
         }
         else
             studentDashboard();
     }
-    if (book_is_here)
+    else if (book_is_here)
     {
         if (book_availability)
         {
             cout << "the book is available.\n";
             cout << "Do you want to borrow this book?\n";
-            cin >> userChoice;
+            cin >> confirm;
             if (confirm == 'y' || confirm == 'Y')
             {
                 borrowbook();
+            }
+            else
+            {
+                cout<<"Do you want to return to the menu?"
+                cin >> confirm;
+                if (confirm == 'y' || confirm == 'Y')
+                {
+                    studentDashboard();
+                }
             }
         }
         else
@@ -627,8 +616,6 @@ void searchbook()
                 studentDashboard();
         }
     }
-
-
 }
 void borrowbook()
 {
@@ -640,7 +627,7 @@ void borrowbook()
         Invalid();
         if (confirm == 'y' || confirm == 'Y')
         {
-            // returnbook manar
+            returnBook();
         }
         else
             studentDashboard();
@@ -648,12 +635,18 @@ void borrowbook()
     else 
     {
         stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]=bookcode;
-        // student.borrowedBooks[student.borrowedCount]=bookcode;
         stud[indexStudent].borrowedCount++;
-        books[bookcode].isAvailable=0;
+        for(int i=0;i<NumberOfBooks;i++)
+        {
+            if(books[i].code==bookcode)
+            {
+                books[i].available=0;
+                break;
+            }
+        }
+        // books[bookcode].isAvailable=0;
     }
-    SaveBooksToFile();
-    SaveDataStudent();
+    
 }
 void viewMyBorrowedBook()
 {
@@ -669,22 +662,22 @@ void viewMyBorrowedBook()
     }
     else 
     {
-        cout<<"The books you have borrowed is \n";
+        cout<<"\t\t The books you have borrowed is \n";
         for(int i=0;i<stud[indexStudent].borrowedCount;i++)
         {
-            cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]].name<<'\n';
+            cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[i]].name<<'\n'; 
         }
-        cout<<"Do you want to retrun a book ? \n";
+        cout<<"Do you want to retrun a book ? \n"; 
         Invalid();
         if(confirm=='y'||confirm=='Y') 
         returnBook();
         else 
-        studentDashboard();
+        studentDashboard(); 
     }
 }
 void returnBook()
 {
- bool not_borrowed=0;
+    bool not_borrowed=0;
     cout<<"The books you have borrowed is \n";
     for(int i=0;i<stud[indexStudent].borrowedCount;i++)
     {
@@ -693,8 +686,8 @@ void returnBook()
     }
     // cout<<"Do you want to retrun a book ? \n";
     Invalid();
- if(stud[indexStudent].borrowedCount==0)
-  {
+    if(stud[indexStudent].borrowedCount==0)
+    {
         cout<<"You have nothing to return!! Do you want to borrow a book ? \n";
         cout<<"Enter y for yes and n to go to the previous page : ";
         Invalid();
@@ -741,8 +734,6 @@ void returnBook()
     {
         studentDashboard();
     }
- SaveBooksToFile();
- SaveDataStudent();
     // SaveBooksToFile();
     // SaveDataStudent();
     // studentDashboard();
@@ -799,5 +790,5 @@ if(tempt==0&&newpassword2!=newpassword)
 
 }
  else{   cout << "Password changed successfully.\n";}
- SaveDataStudent();
+ 
 }
