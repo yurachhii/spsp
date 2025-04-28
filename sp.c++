@@ -804,6 +804,7 @@ void changePass()
                 count++;
             }
             else {
+                stud[indexStudent].password = newpassword;
                 cout << "Password changed successfully!\n";
                 break;
             }
@@ -814,7 +815,6 @@ void changePass()
             return;
         }
         
-        stud[indexStudent].password = newpassword;
-        cout << "Password changed successfully!\n";
+
     }
 }
