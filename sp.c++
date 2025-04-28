@@ -8,7 +8,7 @@
 #define ll long long
 int userChoice;
 char confirm;
-int  indexStudent=-1, findBook(int code); // for user
+int  indexStudent=-1,codeOfbook,findBook(int code); // for user
 using namespace std;
 // for admin log in function
 bool loginadmin();
@@ -559,13 +559,13 @@ void viewallbooks()
 }
 void searchbook()
 {
-    int bookcode;   
+       
     cout << "write the code of the book you are looking for: \n";
-    cin >> bookcode;
+    cin >> codeOfbook;
     bool book_is_here = 0, book_availability;
     for(int i=0 ; i < NumberOfBooks ; i++)
     {
-        if (bookcode ==books[i].code)
+        if (codeOfbook ==books[i].code)
         {
             book_is_here = 1;
             book_availability = books[i].isAvailable;
@@ -620,7 +620,7 @@ void searchbook()
 }
 void borrowbook()
 { 
-    int bookcode;
+   
     Book book;
     if (student.borrowedCount >= MAX_BORROW)
     {
@@ -637,12 +637,12 @@ void borrowbook()
     else 
     { 
         cout << "Enter the code of the book you want to borrow: \n";
-        cin >> bookcode;
-        stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]=bookcode;
+        cin >> codeOfbook;
+        stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]=codeOfbook;
         stud[indexStudent].borrowedCount++;
         for(int i=0;i<NumberOfBooks;i++)
         {
-            if(books[i].code==bookcode)
+            if(books[i].code==codeOfbook)
             {
                 books[i].isAvailable=0;
                 break;
@@ -686,11 +686,16 @@ void returnBook()
 {
     if(stud[indexStudent].borrowedCount==0)
     {
-        cout<<"You have nothing to return!! Do you want to borrow a book ? \n";
-       return;
+        cout<<"You have nothing to return!! Do you want to borrow a book ?(y/n) \n";
+        Invalid();
+        if(confirm=='y'||confirm=='Y')
+        borrowbook();
+        else
+        studentDashboard();
     }
 
-
+    else
+    {
     cout<<"The books you have borrowed is \n";
     for(int i=0;i<stud[indexStudent].borrowedCount;i++)
         {
@@ -705,21 +710,29 @@ void returnBook()
             }
       }
 
-    int bookcode;
+    int entered_code;
     cout << "Enter the code of the book you want to return: \n";
-    cin >> bookcode;
-    int index = findBook(bookcode);
+    cin >> entered_code;
+    int index = findBook(entered_code);
     if (index == -1)
     {
         cout << "Invalid book code.\n";
+        cout << "Do you want to return to the menu? (y/n): ";
+        Invalid();  
+        if (confirm == 'y' || confirm == 'Y')
+        {
+            studentDashboard();
+        }
+        else
+            return;
     }
     
     else
     {
         bool not_borrowed=0;
-        for (int i = 0; i < MAX_BORROW; i++)
+        for (int i = 0; i < stud[indexStudent].borrowedCount; i++)
         {
-            if (stud[indexStudent].borrowedBooks[i] == bookcode)
+            if (stud[indexStudent].borrowedBooks[i] == entered_code)
             {
                // books[bookcode].isAvailable = 1;
                 not_borrowed=1;
@@ -733,14 +746,14 @@ void returnBook()
             // Shift the remaining borrowed books to the left
             if(not_borrowed==1)
             {  
-               for(int i = 0; i < 5; i++)
+               for(int i = 0; i < MAX_BORROW; i++)
               { 
                 if(stud[indexStudent].borrowedBooks[i] !=0)
                  continue;
 
                else
                {
-                  for (int j = i; j < 5; j++)
+                  for (int j = i; j < MAX_BORROW; j++)
                   {
                    if(stud[indexStudent].borrowedBooks[j] !=0)
                     {
@@ -762,6 +775,7 @@ void returnBook()
         {
             cout << "You have not borrowed this book.\n";
         }
+     } 
         
     }
  
@@ -790,7 +804,7 @@ void changePass()
     if(password != stud[indexStudent].password)
     {
         cout << "Incorrect password. Please try again.\n";
-        return ;
+        studentDashboard () ;
     }
     else{
         do {
@@ -812,7 +826,7 @@ void changePass()
         } while(newpassword != newpassword2&&count<3);
         if(count==3&&newpassword != newpassword2){      
             cout << "You have entered wrong password 3 times. Please try again later.\n";
-            return;
+            studentDashboard();
         }
         
 
