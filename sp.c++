@@ -525,7 +525,7 @@ void studentDashboard() // Student Dashboard
 void viewallbooks()
 {
     cout << "Library books:\n";
-    for (int i = 0; i < MAX_BOOKS; i++)
+    for (int i = 0; i < NumberOfBooks; i++)
     {
         cout << i+1<<"."<<books[i].code << "-" << " book:" << books[i].name << endl;
         if (books[i].isAvailable == 1)
@@ -567,7 +567,7 @@ void searchbook()
         if (bookcode ==books[i].code)
         {
             book_is_here = 1;
-            book_availability = books[bookcode].isAvailable;
+            book_availability = books[i].isAvailable;
         }
     }
     
@@ -636,7 +636,15 @@ void borrowbook()
     {
         stud[indexStudent].borrowedBooks[stud[indexStudent].borrowedCount]=bookcode;
         stud[indexStudent].borrowedCount++;
-        books[bookcode].isAvailable=0;
+        for(int i=0;i<NumberOfBooks;i++)
+        {
+            if(books[i].code==bookcode)
+            {
+                books[i].available=0;
+                break;
+            }
+        }
+        // books[bookcode].isAvailable=0;
     }
     
 }
@@ -654,7 +662,7 @@ void viewMyBorrowedBook()
     }
     else 
     {
-        cout<<"The books you have borrowed is \n";
+        cout<<"\t\t The books you have borrowed is \n";
         for(int i=0;i<stud[indexStudent].borrowedCount;i++)
         {
             cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[i]].name<<'\n'; 
