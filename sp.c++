@@ -40,7 +40,7 @@ struct StudentUser
     int borrowedCount = 0; // Number of books borrowed
 } stud[MAX_STUEDENT],student;
 void menu(), registeration(), adminmenu(),LoadStudentFromFile(), viewallbooks(), studentDashboard(), Invalid(), returnBook(), viewMyBook(), borrowbook();
-void login(), viewMyBorrowedBook(),  changePass();
+void login(), viewMyBorrowedBook(),searchbook(),  changePass();
 void Invalid() // if the user entered an invalid oprtion
 {
     cin >> confirm;
@@ -540,7 +540,7 @@ void viewallbooks()
     switch (userChoice)
     {
     case 1:
-        searchbook();
+    searchbook();
         break;
     case 2:
         viewMyBorrowedBook();
@@ -595,7 +595,7 @@ void searchbook()
             }
             else
             {
-                cout<<"Do you want to return to the menu?"
+                cout<<"Do you want to return to the menu?" ;
                 cin >> confirm;
                 if (confirm == 'y' || confirm == 'Y')
                 {
@@ -640,7 +640,7 @@ void borrowbook()
         {
             if(books[i].code==bookcode)
             {
-                books[i].available=0;
+                books[i].isAvailable=0;
                 break;
             }
         }
@@ -665,7 +665,16 @@ void viewMyBorrowedBook()
         cout<<"\t\t The books you have borrowed is \n";
         for(int i=0;i<stud[indexStudent].borrowedCount;i++)
         {
-            cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[i]].name<<'\n'; 
+            int code_to_check = stud[indexStudent].borrowedBooks[i];
+            for(int j =0;j<NumberOfBooks;j++)
+            {
+                if(books[j].code==code_to_check)
+                {
+                    cout<<i+1<<' '<<books[j].name<< " By "<<books[j].author<<'\n';
+                    break;
+                }
+            }
+            // cout<<i+1<<' '<<books[stud[indexStudent].borrowedBooks[i]].name<<'\n'; 
         }
         cout<<"Do you want to retrun a book ? \n"; 
         Invalid();
