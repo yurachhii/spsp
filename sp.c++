@@ -75,14 +75,15 @@ void menu()
     cout << "\t \t \t ----------------------------------\t \t \t \n";
     cout << "1. Student log in \n";
     cout << "2. Admin log in \n";
-    cout << "3. Sign up\n";
+    cout << "3. Student sign up\n";
     cout << "4. Exit \n";
     cout << "Enter your choice between (1-4) : ";
     cin >> userChoice;
     switch (userChoice)
     {
     case 1:
-        studentuser();
+      //  studentuser();
+      LoginStudent();
         break;
     case 2:
         loginadmin();
@@ -151,6 +152,7 @@ void SaveDataStudent() {
         }
     }
     fileStudents.close();
+<<<<<<< HEAD
 
 }
 void SignUp()
@@ -234,11 +236,18 @@ void loginadmin()
     } while (attemp > 0);
     cout << "Log In Failed!\n";
     menu();
+=======
+
+>>>>>>> 2b0cf054ef5af027b82afd4187f9cf77add043a9
 }
 void adminmenu()
 {
     cout << "\t\t\tWelcome, Admin.\t\t\t\n";
+<<<<<<< HEAD
     cout << "\t\t**\t\t\n";
+=======
+    cout << "\t\t************************\t\t\n";
+>>>>>>> 2b0cf054ef5af027b82afd4187f9cf77add043a9
     cout << "1) Add New Books.\n";
     cout << "2) Delete Books.\n";
     cout << "3) Modify Information About Books.\n";
@@ -518,7 +527,7 @@ void studentDashboard() // Student Dashboard
     cout << "4.Return my book \n";
     cout << "5. Changed password \n";
     cout << "6. Log out \n";
-    cout << "Enter your choice from (1 => 6) : ";
+    cout << "Enter your choice from (1 - 6) : ";
     cin >> userChoice;
     switch (userChoice)
     {
@@ -783,6 +792,7 @@ void returnBook() {
 void changePass()
 {
     string password, newpassword, newpassword2;
+<<<<<<< HEAD
     int count = 0;
     cout << "Enter your password: ";
     cin >> password;
@@ -792,6 +802,32 @@ void changePass()
         studentDashboard();
     }
     else {
+=======
+    int count = 0,counterpass=0;
+    cout << "Enter your password: ";
+    cin >> password;
+    while (password != stud[indexStudent].password)
+    {
+        cout << "Incorrect password.\n";
+        cout<<"do you want to try adain?(y/n)\n";
+        Invalid();
+        if(confirm=='n'||confirm=='N')
+        {studentDashboard();break;}
+        else
+        {
+          cout << "Enter your password: ";
+          cin >> password;
+          counterpass++;
+          if(counterpass>=3)
+         {  cout << "You have entered wrong password 3 times. Please try again later.\n";
+            studentDashboard();
+            break;
+          }
+         }
+    }
+    if(password == stud[indexStudent].password)
+    {
+>>>>>>> 2b0cf054ef5af027b82afd4187f9cf77add043a9
         do {
             cout << "Enter a new password: ";
             cin >> newpassword;
@@ -809,11 +845,17 @@ void changePass()
             }
 
         } while (newpassword != newpassword2 && count < 3);
+<<<<<<< HEAD
         if (count == 3 && newpassword != newpassword2) {
             cout << "You have entered wrong password 3 times. Please try again later.\n";
+=======
+        if (count == 3 && newpassword != newpassword2)
+         {
+            cout << "You have entered new password wrong 3 times. Please try again later.\n";
+>>>>>>> 2b0cf054ef5af027b82afd4187f9cf77add043a9
             studentDashboard();
         }
 
 
     }
-}
+ }
