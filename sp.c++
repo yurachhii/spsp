@@ -336,6 +336,142 @@ void SaveBooksToFile()
 
     fileBooks.close();
 }
+// void SignUp()
+// {
+    
+
+//     string password;
+//     int userID;
+//     string username;
+//    cout << "Enter a new userID: ";
+//    cin>>userID;
+
+//     indexStudent = searchForID(userID);
+
+//     if (indexStudent != -1) {
+     
+//         cout << "Account has been successfully created!\n";
+//     }
+//     else{
+//         StudentUser new_user;
+//         new_user.id=userID;
+
+//         cout << "Enter a new username: ";
+//         cin.ignore();
+    
+//         getline(cin,new_user.name);
+        
+//         cout << "Enter a new password: ";
+//             getline(cin,new_user.password);
+//          new_user.borrowedCount=0;
+//         for (int i = 0; i < MAX_BORROW; i++)    
+//         {
+//             new_user.borrowedBooks[i] = 0; // Initialize borrowed books to 0
+//         }
+//         // Add the new user to the array of students
+
+//         stud[studentCount ]=new_user;
+//         studentCount ++;
+//         cout << "Account has successfully created!\n";
+//     }
+//     studentDashboard();
+// }
+
+// //void LoginStudent()
+// {
+//     //int attempts = 3;
+//     //while (attempts > 0) {
+//       //  int userID;
+//         //string password;
+//         //cout << "Enter your id: ";
+//         //cin >> userID;
+//         //cin.ignore();
+//         //cout << "Enter your password: ";
+//         //getline(cin, password);
+
+//         //indexStudent = searchForID(userID);
+
+//         //if (indexStudent >= 0 && searchForPassword(password, indexStudent)) {
+//           //  cout << "Login successful! Welcome, " << stud[indexStudent].name << ".\n";
+//             //studentDashboard();
+//         //}
+
+//         //cout << "Login failed! Invalid ID or password. Attempts left: " << --attempts << "\n";
+//         //if (attempts > 0) {
+//           //  cout << "Do you want to try again? (y/n): ";
+//             //Invalid();
+            //if (confirm == 'n' || confirm == 'N') {
+              //  menu();
+                //return;
+//             }
+//             // else continue to try again by the loop
+//         }
+//     }
+//     cout << "Too many failed attempts. Returning to main menu.\n";
+//     menu();
+// }
+ 
+// for admin log in
+
+//void loginadmin()
+//{
+  //  string adminpassword = "admin2006", enteredpassword;
+    //int attemp = 3;
+    //bool isTrue=0;
+  //  for(int i=0;i<attemp;i++)
+    //{
+      //cout<<"Enter the password : ";
+      //cin.ignore();
+      //لetline(cin, enteredpassword);
+      //if (enteredpassword.size() == adminpassword.size())
+      //{
+        //  for (int i = 0; i < enteredpassword.size(); i++)
+          //{
+            //  if (enteredpassword[i] != adminpassword[i])
+              // {
+                //cout << "Invalid password. Try again.\n";
+                //isTrue=0;
+                //break;
+               //}
+              //else
+              //{
+                //isTrue=1;
+            //  }
+            //}
+         
+            //if(isTrue==1)
+            //{
+             //   cout << "Login successful! Welcome, Admin.\n";
+               // adminmenu();
+            
+            //}
+        //}    
+    
+      
+        //forget else here
+      //  if(isTrue==0||enteredpassword.size()!=adminpassword.size())
+       // {
+         //   cout<<"log in failed ! ";
+           //cout<<"Do you want to try again ? attempts left : "<<attemp-i-1<<endl;
+          //cout<<"(press y for yes press n to Exit) : ";
+           
+          //Invalid();
+          //if(confirm=='n'||confirm=='N')
+          //{
+            //  menu();
+              //break;
+            //}
+         
+        //}
+   //}
+    //if(isTrue==0&&attemp<0)
+    //{
+      //  cout<<"You have entered wrong password 3 times. Please try again later.\n";
+        //menu();
+   // }
+    
+    //adminmenu();
+//}
 
 int FindBook(int code)
 {
@@ -703,39 +839,95 @@ void returnBook() {
 void changePass()
 {
     string password, newpassword, newpassword2;
-    int count = 0,counterpass=0;
+    int count_newpass = 0,counterpass=0;
+    bool isTrue=false,newisTrue=false;
     cout << "Enter your password: ";
-    cin >> password;
-    while (password != stud[indexStudent].password)
+    cin.ignore();
+    getline(cin, password);
+    if (password.size() == stud[indexStudent].password.size()) {
+        for (int i = 0; i < password.size(); i++) {
+            if (password[i] != stud[indexStudent].password[i]) {isTrue=false;break;}
+            else {isTrue=true;}
+        }
+    }
+    
+    while (!isTrue) {
+        cout << "You have entered wrong password.\n";
+        cout << "Do you want to try again?(y/n)\n";
+        Invalid();
+        if (confirm == 'n' || confirm == 'N') {
+            studentDashboard();
+            break;
+        }
+        else {
+            cout << "Enter your password: ";
+            cin.ignore();
+            getline(cin, password);
+            if (password.size() == stud[indexStudent].password.size()) {
+                for (int i = 0; i < password.size(); i++) {
+                    if (password[i] != stud[indexStudent].password[i]) {isTrue=false;break;}
+                    else {isTrue=true;}
+                }
+            }
+            counterpass++;
+            if (counterpass >= 3) {
+                cout << "You have entered wrong password 3 times. Please try again later.\n";
+                studentDashboard();
+                break;
+            }
+        }
+    }
+     if(!isTrue)
     {
         cout << "Incorrect password.\n";
         cout<<"do you want to try adain?(y/n)\n";
         Invalid();
         if(confirm=='n'||confirm=='N')
-        {studentDashboard();break;}
+        {studentDashboard();}
         else
         {
           cout << "Enter your password: ";
-          cin >> password;
+          cin.ignore();
+          getline(cin, password);
           counterpass++;
           if(counterpass>=3)
          {  cout << "You have entered wrong password 3 times. Please try again later.\n";
             studentDashboard();
-            break;
+        
           }
          }
     }
-    if(password == stud[indexStudent].password)
+
+    if(isTrue)
     {
         do {
             cout << "Enter a new password: ";
-            cin >> newpassword;
+            cin.ignore();
+            getline(cin, newpassword);
             cout << "Confirm new password: ";
-            cin >> newpassword2;
+            cin.ignore();   
+            getline(cin, newpassword2);
+            if(newpassword.size()== newpassword2.size())
+            {
+                for(int i=0;i<newpassword.size();i++)
+                {
+                    if(newpassword[i]!=newpassword2[i])
+                    {
+                        newisTrue=false;
+                        break;
+                    }
+                    else
+                    {
+                        newisTrue=true;
+                    }
+                }
+            
+            }
+           
 
-            if (newpassword != newpassword2) {
+            if (newisTrue==false) {
                 cout << "Passwords don't match! Try again.\n";
-                count++;
+                count_newpass++;
             }
             else {
                 stud[indexStudent].password = newpassword;
@@ -743,8 +935,8 @@ void changePass()
                 break;
             }
 
-        } while (newpassword != newpassword2 && count < 3);
-        if (count == 3 && newpassword != newpassword2)
+        } while (count_newpass < 3);
+        if (count_newpass == 3 && newisTrue==false)
          {
             cout << "You have entered new password wrong 3 times. Please try again later.\n";
             studentDashboard();
